@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('photo')->nullable();
             $table->string('phone')->nullable();
-            $table->string('address')->nullable();
+            $table->text('address')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
             $table->enum('role',['admin','warehouse','operator','user'])->default('user');
             $table->rememberToken();

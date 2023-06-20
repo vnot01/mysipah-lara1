@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
                 'username'=>'admin',
                 'email'=>'admin@gmail.com',
                 'password'=>Hash::make('f3rifeb'),
+                'photo'=>'admin.jpg',
                 'status'=>'active',
                 'role'=>'admin'
             ],
@@ -29,6 +30,7 @@ class UsersTableSeeder extends Seeder
                 'username'=>'warehouse',
                 'email'=>'warehouse@gmail.com',
                 'password'=>Hash::make('f3rifeb'),
+                'photo'=>'no_image.jpg',
                 'status'=>'active',
                 'role'=>'warehouse'
             ],
@@ -37,6 +39,7 @@ class UsersTableSeeder extends Seeder
                 'username'=>'operator',
                 'email'=>'operator@gmail.com',
                 'password'=>Hash::make('f3rifeb'),
+                'photo'=>'no_image.jpg',
                 'status'=>'active',
                 'role'=>'operator'
             ],
@@ -45,6 +48,7 @@ class UsersTableSeeder extends Seeder
                 'username'=>'user',
                 'email'=>'user@gmail.com',
                 'password'=>Hash::make('f3rifeb'),
+                'photo'=>'no_image.jpg',
                 'status'=>'active',
                 'role'=>'user'
             ]

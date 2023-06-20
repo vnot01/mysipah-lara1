@@ -4,6 +4,17 @@
 * Copyright © 2022 NobleUI
 * Licensed under ThemeForest License
 */
+.p-viewer, .p-viewer2{
+  float: right;
+  margin-top: -55px;
+  position: relative;
+  z-index: 1;
+  cursor:pointer;
+}
+
+.fa-eye {
+  color: #000;
+}
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
