@@ -82,7 +82,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 //     ])->name('warehouse.profile');
 
 //     // Route::get('/admin/dashboard',[AdminController::class,
-//     // 'AdminDashboard'])->name('admin.dashboard');    
+//     // 'AdminDashboard'])->name('admin.dashboard');
 //     // Route::get('/admin/logout',[AdminController::class,
 //     // 'AdminLogout'])->name('admin.logout');
 //     // Route::get('/admin/profile',[AdminController::class,
@@ -95,20 +95,21 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 //     // 'membuatToken'])->name('admin.profile.membuatToken');
 
 // });
-// Route::middleware(['auth', 'role:operator'])->group(function () {
-//     Route::get('/operator/dashboard', [
-//         OperatorController::class,
-//         'OperatorDashboard'
-//     ])->name('operator.dashboard');
-//     Route::get('/operator/logout', [
-//         OperatorController::class,
-//         'OperatorLogout'
-//     ])->name('operator.logout');
-//     Route::get('/operator/profile', [
-//         OperatorController::class,
-//         'OperatorProfile'
-//     ])->name('operator.profile');
-// });
+
+Route::middleware(['auth', 'role:operator'])->group(function () {
+    Route::get('/operator/dashboard', [
+        OperatorController::class,
+        'OperatorDashboard'
+    ])->name('operator.dashboard');
+    Route::get('/operator/logout', [
+        OperatorController::class,
+        'OperatorLogout'
+    ])->name('operator.logout');
+    Route::get('/operator/profile', [
+        OperatorController::class,
+        'OperatorProfile'
+    ])->name('operator.profile');
+});
 
 // Route::middleware(['auth', 'role:user'])->group(function () {
 //     Route::get('/admin/dashboard', [
