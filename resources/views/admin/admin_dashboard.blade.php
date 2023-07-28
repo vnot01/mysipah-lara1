@@ -16,7 +16,7 @@ License: For each use you must have a valid license purchased only from above li
     <meta name="description" content="Responsive HTML Admin Dashboard Template based on Bootstrap 5">
     <meta name="author" content="NobleUI">
     <meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
     <title>Admin Dashboard</title>
 
     <!-- Fonts -->
@@ -31,6 +31,18 @@ License: For each use you must have a valid license purchased only from above li
 
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('../backend/assets/vendors/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('../backend/assets/vendors/select2/select2.min.css') }}">
+    <!-- Styles -->
+
+  {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" /> --}}
+
+  <!-- Scripts -->
+  {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script> --}}
+  {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
     <!-- End plugin css for this page -->
 
     <!-- Plugin css for this page -->
@@ -78,6 +90,8 @@ License: For each use you must have a valid license purchased only from above li
     <!-- Plugin js for this page -->
     <script src="{{ asset('../backend/assets/vendors/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ asset('../backend/assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
+	<script src="{{ asset('../backend/assets/vendors/inputmask/jquery.inputmask.min.js') }}"></script>
+	<script src="{{ asset('../backend/assets/vendors/select2/select2.min.js') }}"></script>
     <!-- End plugin js for this page -->
 
     <!-- inject:js -->
@@ -87,6 +101,9 @@ License: For each use you must have a valid license purchased only from above li
 
     <!-- Custom js for this page -->
     <script src="{{ asset('../backend/assets/js/dashboard-dark.js') }}"></script>
+
+	<script src="{{ asset('../backend/assets/js/inputmask.js') }}"></script>
+	<script src="{{ asset('../backend/assets/js/select2.js') }}"></script>
     <!-- End custom js for this page -->
 
     <!-- Plugin js for this page -->

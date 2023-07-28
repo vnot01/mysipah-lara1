@@ -65,6 +65,32 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         AdminController::class,
         'hapusToken'
     ])->name('admin.profile.token.hapus');
+
+    Route::get('/main/incomingwaste', [
+        AdminController::class,
+        'incomingWasteIndex'
+    ])->name('main.incoming_waste');
+
+    Route::get('/main/mastersources', [
+        AdminController::class,
+        'masterSourcesIndex'
+    ])->name('main.master_sources');
+    Route::post('/main/mastersources', [
+        AdminController::class,
+        'masterSourcesIndexCreate'
+    ])->name('main.master_sources.create');
+    Route::get('/main/mastersources/edit', [
+        AdminController::class,
+        'masterSourcesEdit'
+    ])->name('main.master_sources.edit');
+    // Route::get('/main/mastersources', [
+    //     AdminController::class,
+    //     'masterSourcesShow'
+    // ])->name('main.master_sources.show');
+    Route::delete('/main/mastersources', [
+        AdminController::class,
+        'masterSourcesDestroy'
+    ])->name('main.master_sources.destroy');
 });
 
 // Route::middleware(['auth', 'role:warehouse'])->group(function () {
