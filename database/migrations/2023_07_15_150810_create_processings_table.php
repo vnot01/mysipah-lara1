@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('volume')->nullable();
             $table->string('total_volume')->nullable();
             $table->string('photo')->nullable();
-            $table->string('total_volume')->nullable();
             $table->enum('remark', ['in','out','warehouse'])->nullable()->default('in');
             $table->timestamps();
         });

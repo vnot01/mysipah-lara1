@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ApiToken;
+use App\Models\Source;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,22 +15,20 @@ use Illuminate\View\View;
 use Laravel\Sanctum\PersonalAccessToken;
 use RealRashid\SweetAlert\Facades\Alert;
 
-
-
 class AdminController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-    
+
     public function AdminDashboard()
     {
         $id=Auth::user()->id;
         $profileData = User::find($id);
         $listTokens = ApiToken::latest()->paginate(5);
         // return view('admin.index', compact('listTokens'));
-        
+
         // return view('admin.index',compact('profileData'));
         // return view('admin.index',compact(['profileData','listTokens' => $listTokens]));
         return view('admin.index', ['profileData'=>$profileData,'listTokens' => $listTokens]);
@@ -53,10 +52,10 @@ class AdminController extends Controller
         $profileData = User::find($id);
         $listTokens = ApiToken::latest()->paginate(5);
         // return view('admin.admin_profile_view',compact('profileData'));
-        
+
         return view('admin.admin_profile_view', ['profileData'=>$profileData,'listTokens' => $listTokens]);
     }
-     
+
     public function AdminProfileStore(Request $request)
     {
         $id=Auth::user()->id;
@@ -72,7 +71,7 @@ class AdminController extends Controller
         // $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         // $uploadOk = 1;
         // $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        
+
         // Check if image file is a actual image or fake image
         // $this->$request->validate([
         //     // 'image' => 'required',
@@ -95,7 +94,7 @@ class AdminController extends Controller
                     $file->move(public_path($target_dir.'admin_images') , $filename);
                     $data['photo'] = $filename;
                 }
-                
+
         }
         $notification = array(
             'message' => 'Profile Updated Successfully',
@@ -109,7 +108,7 @@ class AdminController extends Controller
     }
 
     public function AdminChangePassword(Request $request)
-    {        
+    {
         $request->validate([
             'old_password' => 'required',
             'new_password' => 'required|confirmed'
@@ -121,7 +120,7 @@ class AdminController extends Controller
             );
             return back()->with($notification);
         }
-            
+
         User::whereId(auth()->user()->id)->update([
             'password' => Hash::make($request->new_password)
         ]);
@@ -129,7 +128,7 @@ class AdminController extends Controller
             'message' => 'Password Change Successfully',
             'alert-type' => 'success'
         );
-        
+
         return back()->with($notification);
         // toast('Your Post as been submited!','success');
         // return back()->alert()->success('Success','Password Change Successfully');
@@ -146,7 +145,7 @@ class AdminController extends Controller
         $id=Auth::user()->id;
         $data = User::find($id);
         // $user = User::where('email', $request->email)->firstOrFail();
-        
+
         // $data->token_name = $request->token_name;
 
         $token = $data->createToken($request->token_name)->plainTextToken;
@@ -165,7 +164,7 @@ class AdminController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
-        
+
         // toast('Your Post as been submited!','success');
         // return redirect()->back()->alert()->success('Success','Token Create Successfully');
         // return redirect()->back()->withSuccess('Token Create Successfully');
@@ -191,8 +190,52 @@ class AdminController extends Controller
             'alert-type' => 'success'
         );
         return back()->with($notification);
-        
+
         // toast('Your Post as been submited!','success');
         // return back()->with('Success','Token Delete Successfully');
+    }
+
+    public function incomingWasteIndex(): View
+    {
+        $id=Auth::user()->id;
+        $profileData = User::find($id);
+        $listTokens = ApiToken::latest()->paginate(5);
+        // return view('admin.index', compact('listTokens'));
+
+        // return view('admin.index',compact('profileData'));
+        // return view('admin.index',compact(['profileData','listTokens' => $listTokens]));
+        return view('main.incomingwaste.index', ['profileData'=>$profileData,'listTokens' => $listTokens]);
+    }
+
+    public function masterSourcesIndex(): View
+    {
+        $id=Auth::user()->id;
+        $profileData = User::find($id);
+        $listTSources = Source::latest()->paginate(5);
+        return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
+    }
+
+    public function masterSourcesEdit(): View
+    {
+        $id=Auth::user()->id;
+        $profileData = User::find($id);
+        $listTSources = Source::latest()->paginate(5);
+        return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
+    }
+
+    // public function masterSourcesShow(): View
+    // {
+    //     $id=Auth::user()->id;
+    //     $profileData = User::find($id);
+    //     $listTSources = Source::latest()->paginate(5);
+    //     return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
+    // }
+
+    public function masterSourcesDestroy(): View
+    {
+        $id=Auth::user()->id;
+        $profileData = User::find($id);
+        $listTSources = Source::latest()->paginate(5);
+        return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
     }
 }

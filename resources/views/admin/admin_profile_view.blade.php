@@ -1,6 +1,5 @@
 @extends('admin.admin_dashboard')
 @section('admin')
-
 @include('sweetalert::alert')
 <div class="page-content">
     <div class="row profile-body">
@@ -122,7 +121,7 @@
                                 <label for="address" class="form-label">Address</label>
                                 <textarea id="address" name="address" class="form-control"
                                     placeholder="Address">{{ $profileData->address }}</textarea>
-                                {{-- <input type="text" class="form-control" id="aa" name="aa" 
+                                {{-- <input type="text" class="form-control" id="aa" name="aa"
                     placeholder="Phone Number" value="{{ public_path('upload/admin_images/').$profileData->photo }}">
                                 --}}
                             </div>
@@ -185,7 +184,7 @@
                                     </thead>
                                     <tbody>
                                         @forelse ($listTokens as $a)
-                                        <form action="{{ route('admin.profile.token.hapus', $a->id) }}" 
+                                        <form action="{{ route('admin.profile.token.hapus', $a->id) }}"
                                             method="POST">
                                             {{-- @csrf @method('POST') --}}
                                             <tr>
@@ -275,7 +274,7 @@
         const copyText1 = document.getElementById(element)
         copyText1.select();
         copyText1.setSelectionRange(0, 99999); /* For mobile devices */
-        document.execCommand('copy'); // Simply copies the selected text to clipboard 
+        document.execCommand('copy'); // Simply copies the selected text to clipboard
         Swal.fire({ //displays a pop up with sweetalert
             toast: true,
             position: 'top-end',
@@ -292,7 +291,7 @@
         //     timer: 1500,
         //     timerProgressBar: true,
         // });
-        
+
         // Toast.fire({
         //     icon: 'success',
         //     title: 'Text copied to clipboard'

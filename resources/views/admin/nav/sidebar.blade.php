@@ -21,7 +21,7 @@
 
         <li class="nav-item nav-category">Main</li>
         <li class="nav-item">
-          <a href="pages/apps/chat.html" class="nav-link">
+          <a href="{{ route('main.incoming_waste') }}" class="nav-link">
             <i class="link-icon" data-feather="message-square"></i>
             <span class="link-title">Incoming Waste</span>
           </a>
@@ -62,12 +62,12 @@
           </a>
           <div class="collapse" id="sources">
             <ul class="nav sub-menu">
-              <li class="nav-item">
-                <a href="pages/email/inbox.html" class="nav-link">Create Sources</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/email/read.html" class="nav-link">Lists Sources</a>
-              </li>
+                <li class="nav-item">
+                  <a href="{{ route('main.master_sources') }}" class="nav-link">Lists Sources</a>
+                </li>
+                <li class="nav-item">
+                  <a href="pages/email/inbox.html" class="nav-link">Create Sources</a>
+                </li>
               {{-- <li class="nav-item">
                 <a href="pages/email/compose.html" class="nav-link">Compose</a>
               </li> --}}
