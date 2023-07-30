@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 // use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Operator\OperatorController;
+use App\Http\Controllers\SourceController;
 use App\Http\Controllers\Warehouse\WarehouseController;
 
 /*
@@ -71,26 +72,43 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         'incomingWasteIndex'
     ])->name('main.incoming_waste');
 
-    Route::get('/main/mastersources', [
-        AdminController::class,
-        'masterSourcesIndex'
-    ])->name('main.master_sources');
-    Route::post('/main/mastersources', [
-        AdminController::class,
-        'masterSourcesIndexCreate'
-    ])->name('main.master_sources.create');
-    Route::get('/main/mastersources/edit', [
-        AdminController::class,
-        'masterSourcesEdit'
-    ])->name('main.master_sources.edit');
-    // Route::get('/main/mastersources', [
-    //     AdminController::class,
-    //     'masterSourcesShow'
-    // ])->name('main.master_sources.show');
-    Route::delete('/main/mastersources', [
-        AdminController::class,
-        'masterSourcesDestroy'
-    ])->name('main.master_sources.destroy');
+    Route::controller(SourceController::class)->group(function(){
+        Route::get('/all/sources','AllSources')->name('all.sources');
+        // Route::get('/add/sources','AddSources')->name('add.sources');
+        Route::post('/add/sources', [
+            SourceController::class, 'StoreSources'
+        ])->name('store.sources');
+        Route::get('/all/sources/edit/{id}', [
+            SourceController::class, 'EditSources'
+        ])->name('edit.sources');
+        Route::put('/all/sources/edit', [
+            SourceController::class, 'UpdateSources'
+        ])->name('update.sources');
+        // Route::post('/add/sources','StoreSources')->name('store.sources');
+
+        Route::get('/main/mastersources', [
+            AdminController::class,
+            'masterSourcesIndex'
+        ])->name('main.master_sources');
+        Route::post('/main/mastersources', [
+            AdminController::class,
+            'masterSourcesIndexCreate'
+        ])->name('main.master_sources.create');
+        Route::get('/main/mastersources/edit', [
+            AdminController::class,
+            'masterSourcesEdit'
+        ])->name('main.master_sources.edit');
+        // Route::get('/main/mastersources', [
+        //     AdminController::class,
+        //     'masterSourcesShow'
+        // ])->name('main.master_sources.show');
+        Route::delete('/main/mastersources', [
+            AdminController::class,
+            'masterSourcesDestroy'
+        ])->name('main.master_sources.destroy');
+    });
+
+
 });
 
 // Route::middleware(['auth', 'role:warehouse'])->group(function () {

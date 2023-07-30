@@ -63,8 +63,11 @@
           <div class="collapse" id="sources">
             <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="{{ route('main.master_sources') }}" class="nav-link">Lists Sources</a>
+                    <a href="{{ route('all.sources') }}" class="nav-link">All Sources</a>
                 </li>
+                {{-- <li class="nav-item">
+                  <a href="{{ route('main.master_sources') }}" class="nav-link">Lists Sources</a>
+                </li> --}}
                 <li class="nav-item">
                   <a href="pages/email/inbox.html" class="nav-link">Create Sources</a>
                 </li>
