@@ -60,6 +60,7 @@ License: For each use you must have a valid license purchased only from above li
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('../backend/assets/images/favicon.png') }}" />
 
+    <script src="https://kit.fontawesome.com/9b80c5afe4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
 </head>

@@ -23,7 +23,7 @@
                           <button type="button" class="btn-close"
                             data-bs-dismiss="modal" aria-label="btn-close"></button>
                         </div>
-                        <form method="POST" action="{{ url('/add/sources') }}"
+                        <form method="POST" action="{{ url('/all/sources/add') }}"
                         class="forms-sample"
                         enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -141,24 +141,31 @@ tabindex="-1" aria-labelledby="modalEditSourcesLabel" aria-hidden="true">
                     <td>{{ $key+1 }}</td>
                     <td>{{ $item->nama }}</td>
                     <td class="text-start">
+                        <form onsubmit="return confirm('Are you sure ?');"
+                            action="{{ route('delete.sources', $item->id) }}" method="POST">
                         {{-- <a href="javascript:void(0)" id="btn-edit-source"
                             data-id="{{ $item->id }}" class="btn btn-primary btn-sm">EDIT</a> --}}
                             <a href="javascript:void(0)" data-toggle="tooltip"
                                 data-id="{{ $item->id }}" data-original-title="Edit"
-                                class="edit btn btn-primary btn-sm editPost">Edit</a>
-                        {{-- <button type="button" class="btn btn-primary btn-sm btn-icon-text"
+                                class="btn btn-primary btn-sm editPost fa-regular fa-pen-to-square"></a>
+                        {{-- <button type="button" class="btn btn-primary btn-sm btn-icon-text editPost"
                             id="btn-edit-source">
-                            <i href="javascript:void(0)" id="btn-edit-source" data-id="{{ $item->id }}"
-                                class="btn-icon-prepend" data-feather="edit"></i>
+                            <i href="javascript:void(0)" data-toggle="tooltip"
+                                data-id="{{ $item->id }}" data-original-title="Edit"
+                                id="btn-edit-source"
+                                class="btn-icon-prepend edit btn-sm"
+                                data-feather="edit"></i>
                             EDIT</button> --}}
                         @csrf
-                        @method('DELETE')
-                        <a href="javascript:void(0)" data-toggle="tooltip"
-                            data-id="{{ $item->id }}" data-original-title="Delete"
-                            class="btn btn-danger btn-sm deletePost">Delete</a>
-                        {{-- <button type="submit" class="btn btn-sm btn-danger btn-icon-text">
-                            <i value="{{ $item->id }}" class="btn-icon-prepend" data-feather="trash"></i>
-                            DELETE</button> --}}
+                        @method('POST')
+                        {{-- <button type="submit" class="btn btn-sm btn-danger">HAPUS</button> --}}
+                        {{-- <a href="javascript:void(0)" data-toggle="tooltip"
+                            data-id="{{ url('/all/sources/delete/$item->id') }}" data-original-title="Delete"
+                            class="btn btn-danger btn-sm deletePost">Delete</a> --}}
+                            <button type="submit" class="btn btn-sm btn-danger fa-regular fa-trash-can">
+                                <i value="{{ $item->id }}" class="btn-icon-prepend"></i>
+                            </button>
+                        </form>
                     </td>
                   </tr>
                   @empty

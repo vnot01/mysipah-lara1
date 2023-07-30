@@ -25,15 +25,16 @@ class SourceController extends Controller
             'profileData'=>$profileData,
             'listSources' => $listTSources]);
     }
-    public function AddSources(): View
+    public function NewSources(): View
     {
         $id=Auth::user()->id;
         $profileData = User::find($id);
         // $listTSources = Source::latest()->paginate(10);
         $listTSources = Source::latest()->get();
-        return view('main.mastersources.index', [
+        return view('main.mastersources.create', [
             'profileData'=>$profileData,
             'listSources' => $listTSources]);
+        // return view('main.mastersources.create');
     }
     public function StoreSources(Request $request)
     {
@@ -50,6 +51,23 @@ class SourceController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
+        /* $id=Auth::user()->id;
+        $profileData = User::find($id);
+        // $listTSources = Source::latest()->paginate(10);
+        $listTSources = Source::latest()->get(); */
+
+        //redirect to index
+        /* return redirect()->route('all.sources')->with([
+            $notification,
+            'profileData'=>$profileData,
+            'listSources' => $listTSources,
+        ]); */
+
+        // return view('main.mastersources.index', [
+        //     'profileData'=>$profileData,
+        //     'listSources' => $listTSources,
+        //     $notification,
+        // ]);
     }
     public function EditSources($id)
     {
@@ -82,13 +100,32 @@ class SourceController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function masterSourcesEdit(): View
+    /**
+     * destroy
+     *
+     * @param  mixed $post
+     * @return void
+     */
+    public function DestroySources($id)
     {
-        $id=Auth::user()->id;
-        $profileData = User::find($id);
-        $listTSources = Source::latest()->paginate(5);
-        return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
+        //get post by ID
+        $post = Source::findOrFail($id);
+        //delete post
+        $post->delete();
+        $notification = array(
+            'message' => 'Sources Delete Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
     }
+
+    // public function masterSourcesEdit(): View
+    // {
+    //     $id=Auth::user()->id;
+    //     $profileData = User::find($id);
+    //     $listTSources = Source::latest()->paginate(5);
+    //     return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
+    // }
 
     // public function masterSourcesShow(): View
     // {
@@ -98,11 +135,11 @@ class SourceController extends Controller
     //     return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
     // }
 
-    public function masterSourcesDestroy(): View
-    {
-        $id=Auth::user()->id;
-        $profileData = User::find($id);
-        $listTSources = Source::latest()->paginate(5);
-        return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
-    }
+    // public function masterSourcesDestroy(): View
+    // {
+    //     $id=Auth::user()->id;
+    //     $profileData = User::find($id);
+    //     $listTSources = Source::latest()->paginate(5);
+    //     return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
+    // }
 }

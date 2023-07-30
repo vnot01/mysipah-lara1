@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 // use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\Operator\OperatorController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SourceController;
+use App\Http\Controllers\TypeController;
 use App\Http\Controllers\Warehouse\WarehouseController;
 
 /*
@@ -72,43 +75,108 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         'incomingWasteIndex'
     ])->name('main.incoming_waste');
 
-    Route::controller(SourceController::class)->group(function(){
-        Route::get('/all/sources','AllSources')->name('all.sources');
-        // Route::get('/add/sources','AddSources')->name('add.sources');
-        Route::post('/add/sources', [
-            SourceController::class, 'StoreSources'
-        ])->name('store.sources');
-        Route::get('/all/sources/edit/{id}', [
-            SourceController::class, 'EditSources'
-        ])->name('edit.sources');
-        Route::put('/all/sources/edit', [
-            SourceController::class, 'UpdateSources'
-        ])->name('update.sources');
-        // Route::post('/add/sources','StoreSources')->name('store.sources');
 
-        Route::get('/main/mastersources', [
-            AdminController::class,
-            'masterSourcesIndex'
-        ])->name('main.master_sources');
-        Route::post('/main/mastersources', [
-            AdminController::class,
-            'masterSourcesIndexCreate'
-        ])->name('main.master_sources.create');
-        Route::get('/main/mastersources/edit', [
-            AdminController::class,
-            'masterSourcesEdit'
-        ])->name('main.master_sources.edit');
+    // Route::get('/all/sources','AllSources')->name('all.sources');
+
+    // Route::get('/all/sources', [
+    //     SourceController::class, 'AllSources'
+    // ])->name('all.sources');
+    // // Route::get('/add/sources','AddSources')->name('add.sources');
+    // Route::post('/all/sources/add', [
+    //     SourceController::class, 'StoreSources'
+    // ])->name('store.sources');
+    // Route::get('/all/sources/edit/{id}', [
+    //     SourceController::class, 'EditSources'
+    // ])->name('edit.sources');
+    // Route::put('/all/sources/edit', [
+    //     SourceController::class, 'UpdateSources'
+    // ])->name('update.sources');
+    // Route::post('/all/sources/delete/{id}', [
+    //     SourceController::class, 'DestroySources'
+    // ])->name('delete.sources');
+    // Route::get('/new/sources', [
+    //     SourceController::class, 'NewSources'
+    // ])->name('new.sources');
+
+    Route::controller(SourceController::class)->group(function(){
+        Route::get('/all/sources','AllSources')
+            ->name('all.sources');
+        Route::post('/all/sources/add','StoreSources')
+            ->name('store.sources');
+        Route::get('/all/sources/edit/{id}','EditSources')
+            ->name('edit.sources');
+        Route::put('/all/sources/edit','UpdateSources')
+            ->name('update.sources');
+        Route::post('/all/sources/delete/{id}','DestroySources')
+            ->name('delete.sources');
+        Route::get('/new/sources','NewSources')
+            ->name('new.sources');
+        // Route::get('/main/mastersources', [
+        //     AdminController::class,
+        //     'masterSourcesIndex'
+        // ])->name('main.master_sources');
+        // Route::get('/main/mastersources', [
+        //     SourceController::class,
+        //     'NewSources'
+        // ])->name('main.mastersources.create');
+        // Route::get('/main/mastersources/edit', [
+        //     AdminController::class,
+        //     'masterSourcesEdit'
+        // ])->name('main.master_sources.edit');
         // Route::get('/main/mastersources', [
         //     AdminController::class,
         //     'masterSourcesShow'
         // ])->name('main.master_sources.show');
-        Route::delete('/main/mastersources', [
-            AdminController::class,
-            'masterSourcesDestroy'
-        ])->name('main.master_sources.destroy');
+        // Route::delete('/main/mastersources', [
+        //     AdminController::class,
+        //     'masterSourcesDestroy'
+        // ])->name('main.master_sources.destroy');
     });
 
+    Route::controller(TypeController::class)->group(function(){
+        Route::get('/all/types','AllTypes')
+            ->name('all.types');
+        Route::post('/all/types/add','StoreTypes')
+            ->name('store.types');
+        Route::get('/all/types/edit/{id}','EditTypes')
+            ->name('edit.types');
+        Route::put('/all/types/edit','UpdateTypes')
+            ->name('update.types');
+        Route::post('/all/types/delete/{id}','DestroyTypes')
+            ->name('delete.types');
+        Route::get('/new/types','NewTypes')
+            ->name('new.types');
+    });
 
+    Route::controller(ManufactureController::class)->group(function(){
+        Route::get('/all/manufactures','AllManufactures')
+            ->name('all.manufactures');
+        Route::post('/all/manufactures/add','StoreManufactures')
+            ->name('store.manufactures');
+        Route::get('/all/manufactures/edit/{id}','EditManufactures')
+            ->name('edit.manufactures');
+        Route::put('/all/manufactures/edit','UpdateManufactures')
+            ->name('update.manufactures');
+        Route::post('/all/manufactures/delete/{id}','DestroyManufactures')
+            ->name('delete.manufactures');
+        Route::get('/new/manufactures','NewManufactures')
+            ->name('new.manufactures');
+    });
+
+    Route::controller(ProductController::class)->group(function(){
+        Route::get('/all/products','AllProducts')
+            ->name('all.products');
+        Route::post('/all/products/add','StoreProducts')
+            ->name('store.products');
+        Route::get('/all/products/edit/{id}','EditProducts')
+            ->name('edit.products');
+        Route::put('/all/products/edit','UpdateProducts')
+            ->name('update.products');
+        Route::post('/all/products/delete/{id}','DestroyProducts')
+            ->name('delete.products');
+        Route::get('/new/products','NewProducts')
+            ->name('new.products');
+    });
 });
 
 // Route::middleware(['auth', 'role:warehouse'])->group(function () {
