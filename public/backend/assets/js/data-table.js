@@ -3,7 +3,6 @@
 
 $(function() {
   'use strict';
-
   $(function() {
     $('#dataTableExample').DataTable({
       "aLengthMenu": [
@@ -27,4 +26,57 @@ $(function() {
     });
   });
 
+  $('#btnEditSources').on('click','btnEditSources',function(){
+    var source_id = $(this).var();
+    alert(source_id);
+
+    // $('#modalEditSources').modal('show');
+    // $.ajax({
+    //     type:"GET",
+    //     url:"/edit/sources/"+source_id,
+    //     success: function (response) {
+    //         console.log(response);
+    //     }
+    // });
+  });
+  $(document).on('click','btnEditSources',function(){
+    var source_id = $(this).var();
+    alert(source_id);
+
+    // $('#modalEditSources').modal('show');
+    // $.ajax({
+    //     type:"GET",
+    //     url:"/edit/sources/"+source_id,
+    //     success: function (response) {
+    //         console.log(response);
+    //     }
+    // });
+  });
+//   $(document).on('click','.editSourceBTN',function(){
+//     var source_id = $(this).var();
+//     $('#editSourceModal').modal('show');
+//     $.ajax({
+//         type:"GET",
+//         url:"/edit/sources/"+source_id,
+//         success: function (response) {
+//             console.log(response);
+//         }
+//     });
+//     });
+
 });
+
+// $(document).ready(function(){
+//     $(document).on('click','.editSourceBTN',function(){
+//         var source_id = $(this).var();
+//         $('#editSourceModal').modal('show');
+//         $.ajax({
+//             type:"GET",
+//             url:"/edit/sources/"+source_id,
+//             success: function (response) {
+//                 console.log(response);
+//             }
+//         });
+//     });
+// });
+

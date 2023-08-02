@@ -215,13 +215,13 @@ class AdminController extends Controller
         return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
     }
 
-    public function masterSourcesEdit(): View
-    {
-        $id=Auth::user()->id;
-        $profileData = User::find($id);
-        $listTSources = Source::latest()->paginate(5);
-        return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
-    }
+    // public function masterSourcesEdit(): View
+    // {
+    //     $id=Auth::user()->id;
+    //     $profileData = User::find($id);
+    //     $listTSources = Source::latest()->paginate(5);
+    //     return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
+    // }
 
     // public function masterSourcesShow(): View
     // {
@@ -231,11 +231,11 @@ class AdminController extends Controller
     //     return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
     // }
 
-    public function masterSourcesDestroy(): View
-    {
-        $id=Auth::user()->id;
-        $profileData = User::find($id);
-        $listTSources = Source::latest()->paginate(5);
-        return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
-    }
+    // public function masterSourcesDestroy(): View
+    // {
+    //     $id=Auth::user()->id;
+    //     $profileData = User::find($id);
+    //     $listTSources = Source::latest()->paginate(5);
+    //     return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
+    // }
 }

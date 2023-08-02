@@ -16,7 +16,7 @@ License: For each use you must have a valid license purchased only from above li
     <meta name="description" content="Responsive HTML Admin Dashboard Template based on Bootstrap 5">
     <meta name="author" content="NobleUI">
     <meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin Dashboard</title>
 
     <!-- Fonts -->
@@ -60,6 +60,7 @@ License: For each use you must have a valid license purchased only from above li
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('../backend/assets/images/favicon.png') }}" />
 
+    <script src="https://kit.fontawesome.com/9b80c5afe4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
 </head>
@@ -177,7 +178,10 @@ License: For each use you must have a valid license purchased only from above li
         @endif
 
     </script>
-
+    {{-- <script src="{{ asset('../backend/assets/js/jquery-3.7.0.min.js') }}"></script> --}}
+    {{-- @yield('script') --}}
+    {{-- @include('components.modal-edit-sources') --}}
+    @stack('js')
 </body>
 </html>
 {{-- {{ $profileData }} --}}

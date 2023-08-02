@@ -63,14 +63,11 @@
           <div class="collapse" id="sources">
             <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="{{ route('main.master_sources') }}" class="nav-link">Lists Sources</a>
+                    <a href="{{ route('all.sources') }}" class="nav-link">All Sources</a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/email/inbox.html" class="nav-link">Create Sources</a>
+                  <a href="{{ route('new.sources') }}" class="nav-link">Create Sources</a>
                 </li>
-              {{-- <li class="nav-item">
-                <a href="pages/email/compose.html" class="nav-link">Compose</a>
-              </li> --}}
             </ul>
           </div>
         </li>
@@ -83,14 +80,11 @@
             <div class="collapse" id="types">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="pages/email/inbox.html" class="nav-link">Create Types</a>
+                    <a href="{{ route('all.types') }}" class="nav-link">All Types</a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/email/read.html" class="nav-link">Lists Types</a>
+                  <a href="{{ route('new.types') }}" class="nav-link">Create Types</a>
                 </li>
-                {{-- <li class="nav-item">
-                  <a href="pages/email/compose.html" class="nav-link">Compose</a>
-                </li> --}}
               </ul>
             </div>
         </li>
@@ -103,14 +97,11 @@
             <div class="collapse" id="manufactures">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="pages/email/inbox.html" class="nav-link">Create Manufactures</a>
+                    <a href="{{ route('all.manufactures') }}" class="nav-link">All Manufactures</a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/email/read.html" class="nav-link">Lists Manufactures</a>
+                  <a href="{{ route('new.manufactures') }}" class="nav-link">Create Manufactures</a>
                 </li>
-                {{-- <li class="nav-item">
-                  <a href="pages/email/compose.html" class="nav-link">Compose</a>
-                </li> --}}
               </ul>
             </div>
         </li>
@@ -123,14 +114,11 @@
             <div class="collapse" id="products">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="pages/email/inbox.html" class="nav-link">Create Products</a>
+                    <a href="{{ route('all.products') }}" class="nav-link">All Products</a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/email/read.html" class="nav-link">Lists Products</a>
+                  <a href="{{ route('new.products') }}" class="nav-link">Create Products</a>
                 </li>
-                {{-- <li class="nav-item">
-                  <a href="pages/email/compose.html" class="nav-link">Compose</a>
-                </li> --}}
               </ul>
             </div>
         </li>
