@@ -6,18 +6,18 @@
     <div class="row profile-body">
         <div class="card rounded">
             <div class="card-body">
-                <h6 class="card-title">Add New Types</h6>
-                <form method="POST" action="{{ route('store.types') }}" class="forms-sample"
+                <h6 class="card-title">Add New Manufactures</h6>
+                <form method="POST" action="{{ route('store.manufacturess') }}" class="forms-sample"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="type_name" class="form-label">Type Name</label>
+                        <label for="manufacture_name" class="form-label">Manufacture Name</label>
                             <input type="text" class="form-control
-                                @error('type_name') is-invalid
-                                @enderror " value="{{ old('type_name', '')}}"
-                                id="type_name" name="type_name" autocomplete="off"
+                                @error('manufacture_name') is-invalid
+                                @enderror " value="{{ old('manufacture_name', '')}}"
+                                id="manufacture_name" name="manufacture_name" autocomplete="off"
                                 placeholder="Leave Blank If Not Add New">
-                            @error('type_name')
+                            @error('manufacture_name')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                     </div>
