@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\TempCardController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,5 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::apiResource('tempCards',TempCardController::class);
+Route::controller(TempCardController::class)->group(function(){
+    Route::post('scankartu','ScanKartu')
+        ->name('nokartu.scankartu');
 });
 
