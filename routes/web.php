@@ -153,6 +153,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
             ->name('all.manufactures');
         Route::post('/all/manufactures/add','StoreManufactures')
             ->name('store.manufactures');
+        Route::post('/all/manufactures/add','Store2Manufactures')
+            ->name('store.manufacturess');
         Route::get('/all/manufactures/edit/{id}','EditManufactures')
             ->name('edit.manufactures');
         Route::put('/all/manufactures/edit','UpdateManufactures')
