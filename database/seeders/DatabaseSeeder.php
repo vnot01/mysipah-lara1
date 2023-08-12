@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductSeeder::class);
         $this->call(SourceSeeder::class);
         $this->call(TypeSeeder::class);
+        $this->call(NasabahSeeder::class);
+        $this->call(TempCardSeeder::class);
         \App\Models\User::factory(5)->create();
 
         // \App\Models\User::factory()->create([
