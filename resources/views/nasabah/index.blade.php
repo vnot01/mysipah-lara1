@@ -26,9 +26,14 @@
                         </div>
                         <div class="modal-body">
                           <form>
+                              <div class="mb-3" id="norfid"></div>
                               <div class="mb-3">
-                                <label for="volume" class="form-label">No Kartu RFID:</label>
-                                <input type="text" class="form-control" id="volume">
+                                @foreach($scanKartu as $item)
+                                <label for="nokartu" class="form-label">No Kartu RFID:</label>
+                                <input type="text" name="nokartu" id="nokartu" placeholder="Tempelkan Kartu RFID"
+                                    class="form-control"
+                                    style="width: 200px;" value="{{ $item->nokartu }}">
+                                @endforeach
                                 {{-- <label for="message-text" class="form-label">Message:</label>
                                 <textarea class="form-control" id="message-text"></textarea> --}}
                               </div>
@@ -104,4 +109,30 @@
 
   </div>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#nokartu').change(function(e) {
+            var cnic = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "/nasabah/scan",
+                data: {'nokartu':cnic},
+                dataType: 'json',
+                success : function(data) {
+                    $('#nokartu').val(data.nokartu);
+                },
+                error: function(response) {
+                    alert(response.responseJSON.message);
+                }
+            });
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        setInterval(function(){
+            $("#norfid").load('nokartu.php')
+        },1000);
+    });
+</script>
 @endsection

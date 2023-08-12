@@ -184,6 +184,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/nasabah',[NasabahController::class, 'NasabahDashboard'],function () {
         return view('nasabah.index');
     })->middleware(['auth', 'verified'])->name('nasabah.index');
+    Route::get('/nasabah/scan',[NasabahController::class, 'getTempCard']
+    )->middleware(['auth', 'verified'])->name('scan.kartu');
     // Route::get('/nasabah','NasabahDashboard', function () {
     //     return view('nasabah.index');
     // })->middleware(['auth', 'verified'])->name('nasabah.index');

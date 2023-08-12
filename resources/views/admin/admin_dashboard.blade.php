@@ -18,6 +18,29 @@ License: For each use you must have a valid license purchased only from above li
     <meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin Dashboard</title>
+    {{-- <script type="text/javascript">
+        $(document).ready(function(){
+            setInterval(function(){
+                $("#norfid").load("{{route('nasabah.scan.kartu')}}")
+            },1000);
+        });
+        $("#nokartu").focusout(function(e){
+            alert($(this).val());
+            var cnic = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "{{route('nasabah.scan.kartu')}}",
+                data: {'nokartu':cnic},
+                dataType: 'json',
+                success : function(data) {
+                    $('#nokartu').val(data.nokartu);
+                },
+                error: function(response) {
+                    alert(response.responseJSON.message);
+                }
+            });
+        });
+    </script> --}}
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

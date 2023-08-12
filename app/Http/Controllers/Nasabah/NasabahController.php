@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\PersonalAccessToken;
 use App\Models\Source;
+use App\Models\TempCard;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -33,6 +34,8 @@ class NasabahController extends Controller
         // $listNasabah = Nasabah::latest()->get();
         $listUser = User::latest()->get();
         $limitedUser = User::latest()->limit(5)->get();
+        $scanKartu = TempCard::latest()->get();
+
 
         // return view('admin.index', compact('listTokens'));
         // return view('admin.index',compact('profileData'));
@@ -42,8 +45,32 @@ class NasabahController extends Controller
             'listTokens' => $listTokens,
             'nasabahData' => $listNasabah,
             'userData' => $listUser,
-            'userLimitedData' => $limitedUser]);
+            'userLimitedData' => $limitedUser,
+            'scanKartu' => $scanKartu]);
         // return response(view('admin.index', ['profileData' => $profileData,'listTokens'=>$listTokens]));
+    }
+
+    public function getTempCard()
+    {
+        $id=Auth::user()->id;
+        $profileData = User::find($id);
+        $listTokens = ApiToken::latest()->paginate(5);
+        $getScanKartu = TempCard::latest()->get();
+        // $getScanKartu = Member::where('cnic',$request->cnic)->first();
+        // generate the select input
+        // $output = '';
+        // $output .= '<select name="select-name">';
+
+        // // generate the options for the select
+        // foreach ($statuses as $status) {
+        //     $output .= '<option value="' . $status->id . '">' . $status->name . '</option>';
+        // }
+
+        // // close the select input
+        // $output .= '</select>';
+
+
+        return response()->json($getScanKartu, 200);
     }
 
     public function membuatToken(Request $request)

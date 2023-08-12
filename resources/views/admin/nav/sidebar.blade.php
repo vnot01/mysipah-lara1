@@ -45,12 +45,33 @@
                 </li> --}}
               </ul>
             </div>
-          </li>
+        </li>
         <li class="nav-item">
             <a href="pages/apps/chat.html" class="nav-link">
               <i class="link-icon" data-feather="truck"></i>
               <span class="link-title">Inventory</span>
             </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#nasabah"
+                role="button" aria-expanded="false" aria-controls="nasabah">
+              <i class="link-icon" data-feather="users"></i>
+              <span class="link-title">Nasabah</span>
+              <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapse" id="nasabah">
+              <ul class="nav sub-menu">
+                <li class="nav-item" id="list_nasabah">
+                  <a href="{{ route('nasabah.index') }}" class="nav-link">Lists Nasabah</a>
+                </li>
+                <li class="nav-item" id="new_nasabah">
+                  <a href="{{ route('scan.kartu') }}" class="nav-link">New Processing</a>
+                </li>
+                {{-- <li class="nav-item">
+                  <a href="pages/email/compose.html" class="nav-link">Compose</a>
+                </li> --}}
+              </ul>
+            </div>
         </li>
         <li class="nav-item">
             <a href="{{ route('nasabah.index') }}" class="nav-link">
@@ -61,17 +82,18 @@
 
         <li class="nav-item nav-category">Master</li>
         <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="collapse" href="#sources" role="button" aria-expanded="false" aria-controls="sources">
+          <a class="nav-link" data-bs-toggle="collapse" href="#sources"
+            role="button" aria-expanded="false" aria-controls="sources">
             <i class="link-icon" data-feather="database"></i>
             <span class="link-title">Sources</span>
             <i class="link-arrow" data-feather="chevron-down"></i>
           </a>
           <div class="collapse" id="sources">
             <ul class="nav sub-menu">
-                <li class="nav-item">
+                <li class="nav-item" id="all_sources">
                     <a href="{{ route('all.sources') }}" class="nav-link">All Sources</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="new_sources">
                   <a href="{{ route('new.sources') }}" class="nav-link">Create Sources</a>
                 </li>
             </ul>
