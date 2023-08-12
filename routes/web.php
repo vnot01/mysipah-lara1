@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 // use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ManufactureController;
+use App\Http\Controllers\Nasabah\NasabahController;
 use App\Http\Controllers\Operator\OperatorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SourceController;
@@ -179,6 +180,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/new/products','NewProducts')
             ->name('new.products');
     });
+
+    Route::get('/nasabah',[NasabahController::class, 'NasabahDashboard'],function () {
+        return view('nasabah.index');
+    })->middleware(['auth', 'verified'])->name('nasabah.index');
+    // Route::get('/nasabah','NasabahDashboard', function () {
+    //     return view('nasabah.index');
+    // })->middleware(['auth', 'verified'])->name('nasabah.index');
 });
 
 // Route::middleware(['auth', 'role:warehouse'])->group(function () {

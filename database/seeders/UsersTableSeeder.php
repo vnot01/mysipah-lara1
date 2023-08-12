@@ -51,6 +51,15 @@ class UsersTableSeeder extends Seeder
                 'photo'=>'no_image.jpg',
                 'status'=>'active',
                 'role'=>'user'
+            ],
+            [
+                'name'=>'Nasabah1',
+                'username'=>'nasabah1',
+                'email'=>'nasabah1@gmail.com',
+                'password'=>Hash::make('f3rifeb'),
+                'photo'=>'no_image.jpg',
+                'status'=>'active',
+                'role'=>'nasabah'
             ]
         ]);
     }

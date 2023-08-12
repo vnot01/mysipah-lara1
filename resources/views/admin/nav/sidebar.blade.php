@@ -52,6 +52,12 @@
               <span class="link-title">Inventory</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('nasabah.index') }}" class="nav-link">
+              <i class="link-icon" data-feather="users"></i>
+              <span class="link-title">Nasabah</span>
+            </a>
+          </li>
 
         <li class="nav-item nav-category">Master</li>
         <li class="nav-item">
