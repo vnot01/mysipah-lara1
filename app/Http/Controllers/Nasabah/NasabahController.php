@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\PersonalAccessToken;
 use App\Models\Source;
 use App\Models\TempCard;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -32,11 +33,10 @@ class NasabahController extends Controller
         $listTokens = ApiToken::latest()->paginate(5);
         $listNasabah = Nasabah::with('user')->get();
         // $listNasabah = Nasabah::latest()->get();
-        $listUser = User::latest()->get();
-        $limitedUser = User::latest()->limit(5)->get();
+        // $listUser = User::latest()->get();
+        $listUser = DB::table('users')->get();
+        // $dataNasabah = DB::table('nasabahs')->get();
         $scanKartu = TempCard::latest()->get();
-
-
         // return view('admin.index', compact('listTokens'));
         // return view('admin.index',compact('profileData'));
         // return view('admin.index',compact(['profileData','listTokens' => $listTokens]));
@@ -44,33 +44,84 @@ class NasabahController extends Controller
             'profileData'=>$profileData,
             'listTokens' => $listTokens,
             'nasabahData' => $listNasabah,
+            // 'dataNasabah' => $dataNasabah,
             'userData' => $listUser,
-            'userLimitedData' => $limitedUser,
             'scanKartu' => $scanKartu]);
         // return response(view('admin.index', ['profileData' => $profileData,'listTokens'=>$listTokens]));
     }
 
-    public function getTempCard()
+    public function getTempCard(){
+        $data = [];
+        $childCategory = TempCard::latest()->get();
+        foreach ( $childCategory as $childCat ) {
+            $data =
+            [
+                'id'         => $childCat->id,
+                'nokartu'      => $childCat->nokartu,
+            ];
+        }
+
+        return response()->json($data);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'id' => $childCategory->id,
+        //     'nokartu' => $childCategory->nokartu,
+        // ]);
+    }
+    public function getNoKartu(): View {
+
+        // $id=Auth::user()->id;
+        // $profileData = User::find($id);
+        // $listTokens = ApiToken::latest()->paginate(5);
+        $scanKartu = TempCard::latest()->get();
+        return view('nasabah.nokartu', [
+            'scanKartu' => $scanKartu]);
+    }
+
+    public function StoreNewNasabah(Request $request)
     {
-        $id=Auth::user()->id;
+        $request->validate([
+            'rfid' => 'required|unique:nasabahs,nokartu',
+            'users_id' => 'required',
+        ]);
+        // $dataNasabah = DB::table('users')->get();
+        // $evt = $dataNasabah->users_id;
+        // $dataTempCard = DB::table('temp_cards')->get();
+        // $insc = $request->input('nokartu');
+
+
+        // $inscription = new Nasabah();
+        // $inscription->users_id = $request->selectedID;
+        // $inscription->nokartu = $request->nokartu;
+        // $inscription->save();
+
+        Nasabah::insert([
+            'nokartu'=>$request->rfid,
+            'users_id'=>$request->users_id,
+        ]);
+
+        $notification = array(
+            'message' => 'Sources Create Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+        /* $id=Auth::user()->id;
         $profileData = User::find($id);
-        $listTokens = ApiToken::latest()->paginate(5);
-        $getScanKartu = TempCard::latest()->get();
-        // $getScanKartu = Member::where('cnic',$request->cnic)->first();
-        // generate the select input
-        // $output = '';
-        // $output .= '<select name="select-name">';
+        // $listTSources = Source::latest()->paginate(10);
+        $listTSources = Source::latest()->get(); */
 
-        // // generate the options for the select
-        // foreach ($statuses as $status) {
-        //     $output .= '<option value="' . $status->id . '">' . $status->name . '</option>';
-        // }
+        //redirect to index
+        /* return redirect()->route('all.sources')->with([
+            $notification,
+            'profileData'=>$profileData,
+            'listSources' => $listTSources,
+        ]); */
 
-        // // close the select input
-        // $output .= '</select>';
-
-
-        return response()->json($getScanKartu, 200);
+        // return view('main.mastersources.index', [
+        //     'profileData'=>$profileData,
+        //     'listSources' => $listTSources,
+        //     $notification,
+        // ]);
     }
 
     public function membuatToken(Request $request)

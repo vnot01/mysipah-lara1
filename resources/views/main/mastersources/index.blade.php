@@ -24,27 +24,27 @@
                             data-bs-dismiss="modal" aria-label="btn-close"></button>
                         </div>
                         <form method="POST" action="{{ url('/all/sources/add') }}"
-                        class="forms-sample"
-                        enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <div class="modal-body">
-                          <div class="mb-3">
-                            <label for="source_name" class="form-label">Source Name</label>
-                            <input type="text" class="form-control
-                                @error('source_name') is-invalid
-                                @enderror " value="{{ old('source_name', '')}}"
-                                id="source_name" name="source_name" autocomplete="off"
-                                placeholder="Leave Blank If Not Add New">
-                            @error('source_name')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                          </div>
-                        </div>
+                            class="forms-sample"
+                            enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="source_name" class="form-label">Source Name</label>
+                                    <input type="text" class="form-control
+                                        @error('source_name') is-invalid
+                                        @enderror " value="{{ old('source_name', '')}}"
+                                        id="source_name" name="source_name" autocomplete="off"
+                                        placeholder="Leave Blank If Not Add New">
+                                    @error('source_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

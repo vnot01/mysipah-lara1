@@ -24,38 +24,77 @@
                           <button type="button" class="btn-close"
                             data-bs-dismiss="modal" aria-label="btn-close"></button>
                         </div>
-                        <div class="modal-body">
-                          <form>
-                              <div class="mb-3" id="norfid"></div>
-                              <div class="mb-3">
-                                @foreach($scanKartu as $item)
-                                <label for="nokartu" class="form-label">No Kartu RFID:</label>
-                                <input type="text" name="nokartu" id="nokartu" placeholder="Tempelkan Kartu RFID"
-                                    class="form-control"
-                                    style="width: 200px;" value="{{ $item->nokartu }}">
-                                @endforeach
-                                {{-- <label for="message-text" class="form-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea> --}}
-                              </div>
-                              <div class="mb-3">
-                                <label for="sources-name" class="form-label">Nama Nasabah</label>
-                                <select class="my-select2 form-select" data-width="100%">
-                                    @foreach($userData as $item)
-                                        <option value='{{ $item->id }}'>{{ $item->name }}</option>
+                        <form id='addNewNasabah' method="POST" action="{{ url('/nasabah/add') }}"
+                            class="forms-sample"
+                            enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="modal-body">
+                                {{-- <div class="mb-3" name="nokartu" id="nokartu">
+                                    @forelse($scanKartu as $item)
+                                    <div class="form-group" align="center">
+                                        <label>Scan Your RFID Card</label>
+                                        <br>
+                                        <img src="{{ url('/upload/rfid.gif') }}"
+                                            style="height: 100px;width:100px;" >
+                                        <br>
+                                        {{-- <img src="{{ url('/upload/animasi2.gif') }}"
+                                            style="width:100px;"> -- }}
+                                        <input disabled type="text" name="nokartu" id="nokartu"
+                                            placeholder="Tempelkan Kartu RFID" class="form-control"
+                                            style="width: 200px;" value='{{ $item->nokartu }}'>
+                                    </div>
                                     @endforeach
-                                    {{-- <option value="TX">Texas</option>
-                                    <option value="NY">New York</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="KN">Kansas</option>
-                                    <option value="HW">Hawaii</option> --}}
-                                </select>
-                              </div>
-                          </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save</button>
-                        </div>
+                                </div> --}}
+                                <div class="mb-3" name="nokartu1" id="nokartu1">
+                                    <div class="form-group" align="center">
+                                        <label>Scan Your RFID Card</label>
+                                        <br>
+                                        <img src="{{ url('/upload/rfid.gif') }}"
+                                            style="height: 100px;width:100px;" >
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="mb-3" name="nokartu" id="nokartu">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nasabah-name" class="form-label">Nama Calon Nasabah</label>
+                                    {{-- <select class="my-select2 form-select form-control" name="users_id">
+                                        <option>Select Item</option>
+                                        {{ $selectedID = '' }}
+                                        @foreach ($userData as $key => $value)
+                                            <option value="{{ $key }}"
+                                                {{ ( $key == $selectedID) ? 'selected' : '' }}>
+                                                {{ $value->name }}
+                                            </option>
+                                        @endforeach
+                                    </select> --}}
+                                        {{-- @foreach ($userData as $key => $value) --}}
+                                        <input type="text" class="form-control
+                                            @error('rfid') is-invalid
+                                            @enderror " value="{{ old('rfid', '')}}"
+                                            id="rfid" name="rfid" autocomplete="off"
+                                            placeholder="Leave Blank If Not Add New">
+                                        {{-- @endforeach --}}
+
+                                            @error('rfid')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                    <select class="my-select2 form-select" name="users_id" data-width="100%">
+                                        <option>Select Calon Nasabah</option>
+                                        @foreach($userData as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -108,31 +147,92 @@
     </div>
 
   </div>
-
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     $(document).ready(function() {
-        $('#nokartu').change(function(e) {
-            var cnic = $(this).val();
+        alert('1');
+        $("#nokartu").change(function(e) {
+            alert('1');
+            // $.ajax({
+            //     alert('1');
+            // });
+        });
+
+    });
+</script> --}}
+<script type="text/javascript">
+    // $(document).ready(function(){
+    //     setInterval(function(){
+    //         // $("#nokartu").load('/nasabah/nokartu');
+    //         $("#nokartu").load('/nasabah/scan');
+    //         // $.GET('/nasabah/nokartu', function (data) {
+    //         //     // $('#modalNewNasabah').html("User Details");
+    //         //     // $('#modalNewNasabah').modal('show');
+    //         //     $('#nokartu').val(data.nokartu);
+    //         // })
+    //     },1000);
+    // });
+    $(document).ready(function(){
+        var self = $(this),
+        nokartu = self.data('nokartu');
+        id = self.data('id');
+        // var target = self.data('target');
+        setInterval(function(){
             $.ajax({
-                type: "GET",
-                url: "/nasabah/scan",
-                data: {'nokartu':cnic},
-                dataType: 'json',
-                success : function(data) {
-                    $('#nokartu').val(data.nokartu);
+                type:"GET",
+                url:"/nasabah/scan",
+                data: {
+                    nokartu: nokartu,
+                    id: id
                 },
-                error: function(response) {
-                    alert(response.responseJSON.message);
+                dataType: 'json',
+                success:function(data)
+                {
+                    // var data1 = JSON.parse(data);
+                    // for (i = 0; i < data1.length; i += 1)
+                    // {
+                    //     var record = data1[i];
+                    //     console.log(record.nokartu);
+                    // }
+                    //do something with response data
+                    console.log(data);
+                    $('#rfid').val(data.nokartu);
                 }
             });
-        });
-    });
-</script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        setInterval(function(){
-            $("#norfid").load('nokartu.php')
         },1000);
     });
+    // $(document).on('change', '#nokartu',function(){
+    // var testId = $(this).val();
+    // console.log($(this).val());
+    //     $.ajax({
+    //         type:'GET',
+    //         url:"{{ route('nokartu') }}",
+    //         data:{'test_id':testId},
+    //         success:function(data){
+    //             console.log(data);
+    //         }
+    //     });
+    // });
 </script>
+{{-- <script type="text/javascript">
+    $(document).ready(function(){
+        $('#nokartu').change(function(){
+            var eid = $(this).val();
+            // var csrf = $('#token').val();
+            $.ajax({
+                url : '/nasabah/nokartu',
+                data : {rfid:nokartu},
+                type : 'get'
+            }).success(function(e){
+                $('#rfid').val(e)
+            })
+        })
+    });
+</script> --}}
+{{-- <script type="text/javascript">
+    $(document).ready(function(){
+        setInterval(function(){
+            $("#nokartu").load('nokartu.php')
+        },1000);
+    });
+</script> --}}
 @endsection

@@ -82,7 +82,7 @@ License: For each use you must have a valid license purchased only from above li
     <link rel="stylesheet" href="{{ asset('../backend/assets/css/demo2/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('../backend/assets/images/favicon.png') }}" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" ></script>
     <script src="https://kit.fontawesome.com/9b80c5afe4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}

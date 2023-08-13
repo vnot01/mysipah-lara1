@@ -52,7 +52,7 @@
               <span class="link-title">Inventory</span>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#nasabah"
                 role="button" aria-expanded="false" aria-controls="nasabah">
               <i class="link-icon" data-feather="users"></i>
@@ -69,10 +69,10 @@
                 </li>
                 {{-- <li class="nav-item">
                   <a href="pages/email/compose.html" class="nav-link">Compose</a>
-                </li> --}}
+                </li> -- }}
               </ul>
             </div>
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a href="{{ route('nasabah.index') }}" class="nav-link">
               <i class="link-icon" data-feather="users"></i>
