@@ -194,7 +194,7 @@
                     //     console.log(record.nokartu);
                     // }
                     //do something with response data
-                    console.log(data);
+                    // console.log(data);
                     $('#rfid').val(data.nokartu);
                 }
             });
