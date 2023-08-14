@@ -24,5 +24,7 @@ Route::apiResource('tempCards',TempCardController::class);
 Route::controller(TempCardController::class)->group(function(){
     Route::post('scankartu','ScanKartu')
         ->name('nokartu.scankartu');
+    // Route::get('scankartu/{noRFID}','ScanKartu')
+    //     ->name('nokartu.scankartu');
 });
 

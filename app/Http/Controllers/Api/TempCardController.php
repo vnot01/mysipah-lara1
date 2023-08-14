@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TempCardResource;
+use App\Models\Nasabah;
 use App\Models\TempCard;
 use Illuminate\Http\Request;
 
@@ -23,21 +24,83 @@ class TempCardController extends Controller
         // $request->validate([
         //     'nokartu' => 'required',
         // ]);
+        $noRFID = $request->input('id');
         $hapus = TempCard::truncate();
-        // if ($hapus){
-        //     $tempCard = new TempCard();
-        //     $tempCard -> nokartu = $nokartu->input('nokartu');
-        //     $tempCard -> save();
-        // }
-        // $notification = array(
-        //     'message' => 'Manufactures Update Successfully',
-        //     'alert-type' => 'success'
-        // );
-        // return response()->json($tempCard);
+        $rfidNasabahFind     = Nasabah::where("nokartu",$noRFID)->count();
+        $rfidNasabah = Nasabah::where("nokartu",$noRFID)->get();
+
         if ($hapus){
-            $tempCards = TempCard::create($request->all());
+            // $tempCards = TempCard::create($request->all());
+            $simpanRFID=TempCard::insert([
+                'nokartu'=>$noRFID,
+            ]);
+            if ($simpanRFID) {
+                if( $rfidNasabahFind ==0 ){
+                    $notification = array(
+                        'status'=>true,
+                        'alert-type' => 'success',
+                        'No RFID' => $noRFID,
+                        'qty'=>$rfidNasabahFind,
+                    );
+                    // return response()->json([
+                    //     'status'=>true,
+                    //     'No RFID' => $noRFID,
+                    //     'qty'=>$rfidNasabahFind,
+                    // ]);
+                }else{
+                    $notification = array(
+                        'status'=>true,
+                        'alert-type' => 'success',
+                        'No RFID' => $noRFID,
+                        'qty'=>$rfidNasabahFind,
+                        'data'=>$rfidNasabah
+                    );
+                }
+            }else{
+                $notification = array(
+                    'status'=>false,
+                    'alert-type' => 'gagal simpan',
+                );
+            }
+        }else{
+            $notification = array(
+                'status'=>false,
+                'alert-type' => 'gagal hapus',
+            );
         }
-        return new TempCardResource($tempCards);
+
+        // $data = [];
+        // $rfidNasabah = TempCard::latest()->get();
+        // if ($hapus){
+        //     // $tempCards = TempCard::create($request->all());
+        //     TempCard::insert([
+        //         'nokartu'=>$noRFID,
+        //     ]);
+        //     // if(is_null($rfidNasabah)){
+        //     //     $notification = array(
+        //     //         'message' => 'Sources Create Successfully',
+        //     //         'alert-type' => 'success',
+        //     //         'data'         => $noRFID,
+        //     //     );
+        //     // }else{
+        //         // foreach ( $rfidNasabah as $a ) {
+        //         //     $notification = array(
+        //         //         'message' => 'Sources Create Successfully',
+        //         //         'alert-type' => 'success',
+        //         //         'id'         => $a->id,
+        //         //         'nokartu'      => $a->nokartu,
+        //         //     );
+        //         // }
+        //         $notification = array(
+        //             'message' => 'Sources Create Successfully',
+        //             'alert-type' => 'success',
+        //                 'data'         => $rfidNasabah,
+        //         );
+        //     // }
+            
+        // }
+        // return new TempCardResource($tempCards);
+        return response()->json($notification);
     }
 
     /**

@@ -204,7 +204,10 @@ class AdminController extends Controller
 
         // return view('admin.index',compact('profileData'));
         // return view('admin.index',compact(['profileData','listTokens' => $listTokens]));
-        return view('main.incomingwaste.index', ['profileData'=>$profileData,'listTokens' => $listTokens]);
+        return view('main.incomingwaste.index', [
+            'profileData'=>$profileData,
+            'listTokens' => $listTokens
+        ]);
     }
 
     public function masterSourcesIndex(): View
