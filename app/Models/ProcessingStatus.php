@@ -9,4 +9,9 @@ class ProcessingStatus extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function products()
+    {
+        return $this->belongsTo(Product::class, 'products_id');
+    }
 }

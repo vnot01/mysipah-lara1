@@ -15,4 +15,8 @@ class Nasabah extends Model
     {
         return $this->belongsTo(User::class, 'users_id');
     }
+
+    public function nasabahRFID(){
+        return $this->hasMany(Nasabah::class,TempCard::class);
+    }
 }

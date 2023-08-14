@@ -9,4 +9,8 @@ class TempCard extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    // public function nasabah(){
+    //     return $this->hasOne(Nasabah::class,'nokartu');
+    // }
 }
