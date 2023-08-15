@@ -11,17 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('processings', function (Blueprint $table) {
+        Schema::create('warehouses_table', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sources_id')->nullable()->default(1);
             $table->unsignedBigInteger('types_id')->nullable()->default(1);
             $table->unsignedBigInteger('manufactures_id')->nullable()->default(1);
             $table->unsignedBigInteger('locations_id')->nullable()->default(1);
-            $table->unsignedBigInteger('nasabahs_id')->nullable()->default(1);
             $table->string('volume')->nullable();
             $table->string('total_volume')->nullable();
             $table->string('photo')->nullable();
-            $table->enum('remark', ['in','out','warehouse'])
+            $table->enum('remark', ['in','out','processing'])
                 ->nullable()->default('in');
             $table->timestamps();
         });
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('processings');
+        Schema::dropIfExists('warehouses_table');
     }
 };

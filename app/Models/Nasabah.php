@@ -19,4 +19,9 @@ class Nasabah extends Model
     public function nasabahRFID(){
         return $this->hasMany(Nasabah::class,TempCard::class);
     }
+
+    // public function processing()
+    // {
+    //     return $this->hasManyThrough(User::class, Processing::class);
+    // }
 }

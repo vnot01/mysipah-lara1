@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\Nasabah\NasabahController;
 use App\Http\Controllers\Operator\OperatorController;
+use App\Http\Controllers\ProcessingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SourceController;
 use App\Http\Controllers\TypeController;
@@ -72,10 +73,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     ])->name('admin.profile.token.hapus');
 
     Route::get('/main/incomingwaste', [
-        AdminController::class,
+        ProcessingController::class,
         'incomingWasteIndex'
     ])->name('main.incoming_waste');
 
+    Route::post('/main/incomingwaste/delete/{id}',[
+        ProcessingController::class,
+        'DestroyIncomingWaste'])
+        ->name('delete.incoming_waste');
 
     // Route::get('/all/sources','AllSources')->name('all.sources');
 

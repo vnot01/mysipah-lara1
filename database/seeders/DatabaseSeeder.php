@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(NasabahSeeder::class);
         $this->call(TempCardSeeder::class);
         $this->call(StatusAlatSeeder::class);
+        $this->call(ProcessingSeeder::class);
         \App\Models\User::factory(5)->create();
 
         // \App\Models\User::factory()->create([

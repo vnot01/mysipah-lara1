@@ -14,10 +14,10 @@ class Processing extends Model
         return $this->belongsTo(Source::class, 'sources_id');
     }
 
-    // public function products()
-    // {
-    //     return $this->belongsTo(Product::class, 'products_id');
-    // }
+    public function nasabahs()
+    {
+        return $this->belongsTo(Nasabah::class, 'nasabahs_id');
+    }
 
     public function types()
     {

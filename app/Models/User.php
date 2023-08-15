@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -25,9 +26,14 @@ class User extends Authenticatable
     // ];
 
     protected $guarded = [];
-    public function nasabah()
+    // public function nasabah()
+    // {
+    //     // return $this->hasMany(Nasabah::class,'users_id');
+    //     return $this->hasManyThrough(Nasabah::class, Processing::class);
+    // }
+    public function nasabah(): HasOneThrough
     {
-        return $this->hasMany(Nasabah::class,'users_id');
+        return $this->hasOneThrough(Nasabah::class, Processing::class);
     }
 
 

@@ -141,27 +141,39 @@
                     <th>Manufacture</th>
                     <th>Vol (kg)</th>
                     <th>Last Update</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @forelse ($listProcessings as $key => $item)
                   <tr>
-                    <td>1</td>
-                    <td>1234</td>
-                    <td>Rumah Tangga</td>
-                    <td>Recycle</td>
-                    <td>Others</td>
-                    <td>3.1</td>
-                    <td>2023-07-15</td>
+                    <td>{{ $key+1 }}</td>
+                    <td>{{ $item->nasabahs->user->name }}</td>
+                    <td>{{ $item->sources->nama }}</td>
+                    <td>{{ $item->types->nama }}</td>
+                    <td>{{ $item->manufactures->nama }}</td>
+                    <td>{{ $item->volume }}</td>
+                    <td>{{ $item->created_at }}</td>
+                    <td class="text-start">
+                        <form onsubmit="return confirm('Are you sure ?');"
+                            action="{{ route('delete.incoming_waste', $item->id) }}" method="POST">
+                            {{-- <a href="javascript:void(0)" data-toggle="tooltip"
+                                data-id="{{ $item->id }}" data-original-title="Edit"
+                                class="btn btn-primary btn-sm editPost fa-regular fa-pen-to-square"></a> --}}
+                        @csrf
+                        @method('POST')
+                            <button type="submit" class="btn btn-sm btn-danger fa-regular fa-trash-can"
+                                data-toggle="tooltip" title="Delete Incoming Waste!">
+                                <i value="{{ $item->id }}" class="btn-icon-prepend"></i>
+                            </button>
+                        </form>
+                    </td>
                   </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>4321</td>
-                    <td>Rumah Tangga</td>
-                    <td>Residu</td>
-                    <td>Others</td>
-                    <td>10.1</td>
-                    <td>2023-07-15</td>
-                  </tr>
+                  @empty
+                    <div class="alert alert-danger">
+                        No Data Available.
+                    </div>
+                  @endforelse
                 </tbody>
               </table>
             </div>
