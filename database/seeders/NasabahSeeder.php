@@ -16,6 +16,10 @@ class NasabahSeeder extends Seeder
         //
         DB::table('nasabahs')->insert([
             [
+                'users_id'=>'1',
+                'nokartu'=>'xxxxxxxxxxx',
+            ],
+            [
                 'users_id'=>'5',
                 'nokartu'=>'81601992109',
             ],

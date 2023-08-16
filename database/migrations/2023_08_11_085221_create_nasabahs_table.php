@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('nasabahs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('users_id');
-            $table->string('nokartu');
+            $table->unsignedBigInteger('users_id')->default('1');
+            $table->string('nokartu')->default('xxxxxxxxxxx');
             $table->timestamps();
         });
     }

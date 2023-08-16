@@ -75,50 +75,93 @@
                           <button type="button" class="btn-close"
                             data-bs-dismiss="modal" aria-label="btn-close"></button>
                         </div>
-                        <div class="modal-body">
-                          <form>
-                              <div class="mb-3">
-                                <label for="sources-name" class="form-label">Sources Waste</label>
-                                <select class="my-select2 form-select" data-width="100%">
-                                    <option value="TX">Texas</option>
-                                    <option value="NY">New York</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="KN">Kansas</option>
-                                    <option value="HW">Hawaii</option>
-                                </select>
-                              </div>
-                              <div class="mb-3">
-                                <label for="sources-name" class="form-label">Types Waste</label>
-                                <select class="my-select2 form-select" data-width="100%">
-                                    <option value="TX">Texas</option>
-                                    <option value="NY">New York</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="KN">Kansas</option>
-                                    <option value="HW">Hawaii</option>
-                                </select>
-                              </div>
-                              <div class="mb-3">
-                                <label for="sources-name" class="form-label">Manufactures Waste</label>
-                                <select class="my-select2 form-select" data-width="100%">
-                                    <option value="TX">Texas</option>
-                                    <option value="NY">New York</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="KN">Kansas</option>
-                                    <option value="HW">Hawaii</option>
-                                </select>
-                              </div>
-                              <div class="mb-3">
-                                <label for="volume" class="form-label">Volume (kg):</label>
-                                <input type="text" class="form-control" id="volume">
-                                {{-- <label for="message-text" class="form-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea> --}}
-                              </div>
-                          </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save</button>
-                        </div>
+                        <form id='addNewIncoming' method="POST" action="{{ url('/incomingwaste/add') }}"
+                            class="forms-sample"
+                            enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="modal-body">
+                                <div class="mb-3" name="nokartu1" id="nokartu1">
+                                    <div class="form-group" align="center">
+                                        <label>Scan Your RFID Card</label>
+                                        <br>
+                                        <img src="{{ url('/upload/rfid.gif') }}"
+                                            style="height: 100px;width:100px;" >
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="mb-3" name="nokartu" id="nokartu"></div>
+                                <div class="mb-3">
+                                    <label for="nasabah-name" class="form-label">No. RFID</label>
+                                    {{-- <select class="my-select2 form-select form-control" name="users_id">
+                                        <option>Select Item</option>
+                                        {{ $selectedID = '' }}
+                                        @foreach ($userData as $key => $value)
+                                            <option value="{{ $key }}"
+                                                {{ ( $key == $selectedID) ? 'selected' : '' }}>
+                                                {{ $value->name }}
+                                            </option>
+                                        @endforeach
+                                    </select> --}}
+                                        {{-- @foreach ($userData as $key => $value) --}}
+                                        <input type="text" readonly="true" class="form-control
+                                            @error('rfid') is-invalid
+                                            @enderror " value="{{ old('rfid', '')}}"
+                                            id="rfid" name="rfid" autocomplete="off"
+                                            placeholder="Leave Blank If Not Add New">
+                                        {{-- @endforeach --}}
+
+                                            @error('rfid')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="sources-name" class="form-label">Sources Waste</label>
+                                    <select class="my-select2 form-select" data-width="100%">
+                                        @forelse ($listSources as $key => $item_source)
+                                        <option name="source_id" value="{{ $item_source->id }}">{{ $item_source->nama }}</option>
+                                        @empty
+                                        <div class="alert alert-danger">
+                                            <option value="-1">No Data Available.</option>
+                                        </div>
+                                        @endforelse
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="types-name" class="form-label">Types Waste</label>
+                                    <select class="my-select2 form-select" data-width="100%">
+                                        @forelse ($listTypes as $key => $item_Types)
+                                        <option name="type_id" value="{{ $item_Types->id }}">{{ $item_Types->nama }}</option>
+                                        @empty
+                                        <div class="alert alert-danger">
+                                            <option value="-1">No Data Available.</option>
+                                        </div>
+                                        @endforelse
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="manufactures-name" class="form-label">Manufactures Waste</label>
+                                    <select class="my-select2 form-select" data-width="100%">
+                                        @forelse ($listManufactures as $key => $item_Manufactures)
+                                        <option name="manufacture_id" value="{{ $item_Manufactures->id }}">{{ $item_Manufactures->nama }}</option>
+                                        @empty
+                                        <div class="alert alert-danger">
+                                            <option value="-1">No Data Available.</option>
+                                        </div>
+                                        @endforelse
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="volume" class="form-label">Volume (kg):</label>
+                                    <input name="volume" type="text" class="form-control" id="volume">
+                                    {{-- <label for="message-text" class="form-label">Message:</label>
+                                    <textarea class="form-control" id="message-text"></textarea> --}}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -146,14 +189,15 @@
                 </thead>
                 <tbody>
                   @forelse ($listProcessings as $key => $item)
-                  <tr>
+                  <tr class="align-middle">
                     <td>{{ $key+1 }}</td>
-                    <td>{{ $item->nasabahs->user->name }}</td>
+                    <td>{{ $item->nasabahs->user->name }} <br>
+                        {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td>
                     <td>{{ $item->sources->nama }}</td>
                     <td>{{ $item->types->nama }}</td>
                     <td>{{ $item->manufactures->nama }}</td>
                     <td>{{ $item->volume }}</td>
-                    <td>{{ $item->created_at }}</td>
+                    <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td>
                     <td class="text-start">
                         <form onsubmit="return confirm('Are you sure ?');"
                             action="{{ route('delete.incoming_waste', $item->id) }}" method="POST">

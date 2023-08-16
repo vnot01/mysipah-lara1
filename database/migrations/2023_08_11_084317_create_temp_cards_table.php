@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('temp_cards', function (Blueprint $table) {
             $table->id();
-            $table->string('nokartu');
+            $table->string('nokartu')->default('xxxxxxxxxxx');
             $table->timestamps();
         });
     }

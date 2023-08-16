@@ -195,28 +195,28 @@ class AdminController extends Controller
         // return back()->with('Success','Token Delete Successfully');
     }
 
-    public function incomingWasteIndex(): View
-    {
-        $id=Auth::user()->id;
-        $profileData = User::find($id);
-        $listTokens = ApiToken::latest()->paginate(5);
-        // return view('admin.index', compact('listTokens'));
+    // public function incomingWasteIndex(): View
+    // {
+    //     $id=Auth::user()->id;
+    //     $profileData = User::find($id);
+    //     $listTokens = ApiToken::latest()->paginate(5);
+    //     // return view('admin.index', compact('listTokens'));
 
-        // return view('admin.index',compact('profileData'));
-        // return view('admin.index',compact(['profileData','listTokens' => $listTokens]));
-        return view('main.incomingwaste.index', [
-            'profileData'=>$profileData,
-            'listTokens' => $listTokens
-        ]);
-    }
+    //     // return view('admin.index',compact('profileData'));
+    //     // return view('admin.index',compact(['profileData','listTokens' => $listTokens]));
+    //     return view('main.incomingwaste.index', [
+    //         'profileData'=>$profileData,
+    //         'listTokens' => $listTokens
+    //     ]);
+    // }
 
-    public function masterSourcesIndex(): View
-    {
-        $id=Auth::user()->id;
-        $profileData = User::find($id);
-        $listTSources = Source::latest()->paginate(5);
-        return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
-    }
+    // public function masterSourcesIndex(): View
+    // {
+    //     $id=Auth::user()->id;
+    //     $profileData = User::find($id);
+    //     $listTSources = Source::latest()->paginate(5);
+    //     return view('main.mastersources.index', ['profileData'=>$profileData,'listSources' => $listTSources]);
+    // }
 
     // public function masterSourcesEdit(): View
     // {
