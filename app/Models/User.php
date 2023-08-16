@@ -33,8 +33,9 @@ class User extends Authenticatable
     // }
     public function nasabah(): HasOneThrough
     {
-        return $this->hasOneThrough(Nasabah::class, Processing::class);
+        return $this->hasManyThrough(Nasabah::class, Processing::class,'users_id','nokartu');
     }
+
 
 
     /**

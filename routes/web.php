@@ -24,13 +24,13 @@ use App\Http\Controllers\Warehouse\WarehouseController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [
+    Route::get('/', [
         AdminController::class,
         'AdminDashboard'
     ])->name('admin.dashboard');
@@ -76,11 +76,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ProcessingController::class,
         'incomingWasteIndex'
     ])->name('main.incoming_waste');
-
     Route::post('/main/incomingwaste/delete/{id}',[
         ProcessingController::class,
         'DestroyIncomingWaste'])
         ->name('delete.incoming_waste');
+    Route::post('/incomingwaste/add',[
+        NasabahController::class,
+        'StoreNewIncomingWaste'])
+        ->name('incomingwaste.add');
 
     // Route::get('/all/sources','AllSources')->name('all.sources');
 
@@ -194,7 +197,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     )->middleware(['auth', 'verified'])->name('scan.kartu');
     Route::get('/nasabah/nokartu',[NasabahController::class, 'getNoKartu'])
         ->middleware(['auth', 'verified'])->name('nokartu');
-
     Route::post('/nasabah/add',[NasabahController::class, 'StoreNewNasabah'])
         ->name('nasabah.add');
 });

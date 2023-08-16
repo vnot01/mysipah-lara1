@@ -30,7 +30,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-baseline">
-                                <h6 class="card-title mb-0">New Customers</h6>
+                                <h6 class="card-title mb-0">Waste Process</h6>
                                 <div class="dropdown mb-2">
                                     <a type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -65,7 +65,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-baseline">
-                                <h6 class="card-title mb-0">New Orders</h6>
+                                <h6 class="card-title mb-0">Waste Incoming</h6>
                                 <div class="dropdown mb-2">
                                     <a type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -139,7 +139,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline mb-2">
-                        <h6 class="card-title mb-0">Monthly sales</h6>
+                        <h6 class="card-title mb-0">Monthly Waste Generate</h6>
                         <div class="dropdown mb-2">
                             <a type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -153,7 +153,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-muted">Sales are activities related to selling or the number of goods or services sold in a given time period.</p>
+                    <p class="text-muted">Waste Generate are activities related to pickup or the number of garbage or pickup services in a given time period.</p>
                     <div id="monthlySalesChart"></div>
                 </div>
             </div>
@@ -413,7 +413,7 @@
                         </tbody>
                     </table>
                     </div>
-                </div> 
+                </div>
                 </div>
             </div> --}}
     </div> <!-- row -->

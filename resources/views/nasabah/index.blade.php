@@ -57,7 +57,7 @@
                                 <div class="mb-3" name="nokartu" id="nokartu">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="nasabah-name" class="form-label">Nama Calon Nasabah</label>
+                                    <label for="nasabah-name" class="form-label">No. RFID</label>
                                     {{-- <select class="my-select2 form-select form-control" name="users_id">
                                         <option>Select Item</option>
                                         {{ $selectedID = '' }}
@@ -69,7 +69,7 @@
                                         @endforeach
                                     </select> --}}
                                         {{-- @foreach ($userData as $key => $value) --}}
-                                        <input type="text" class="form-control
+                                        <input type="text" readonly="true" class="form-control
                                             @error('rfid') is-invalid
                                             @enderror " value="{{ old('rfid', '')}}"
                                             id="rfid" name="rfid" autocomplete="off"
@@ -79,6 +79,9 @@
                                             @error('rfid')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nasabah-name" class="form-label">Nama Calon Nasabah</label>
                                     <select class="my-select2 form-select" name="users_id" data-width="100%">
                                         <option>Select Calon Nasabah</option>
                                         @foreach($userData as $item)
