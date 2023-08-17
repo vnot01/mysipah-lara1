@@ -23,7 +23,7 @@ class ProcessingController extends Controller
         $listTypes = Type::all();
         $listManufactures = Manufacture::all();
         $listProcessings = Processing::with(
-            'nasabahs','sources','types','manufactures','locations')->get();
+            'nasabahs','sources','types','manufactures','inventories')->get();
         return view('main.incomingwaste.index', [
             'profileData'=>$profileData,
             'listProcessings' => $listProcessings,
