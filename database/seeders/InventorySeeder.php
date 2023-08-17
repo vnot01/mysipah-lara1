@@ -18,7 +18,7 @@ class InventorySeeder extends Seeder
                 // 'products_id'=>'1',
                 'types_id'=>'1',
                 // 'photo'=>'Lainnya',
-                'volume'=>'0.5',
+                'volume'=>'10.5',
                 // 'ukuran'=>'Lainnya',
                 // 'jumlah_produk'=>'Lainnya',
             ],

@@ -24,8 +24,8 @@ class Nasabah extends Model
         return $this->hasMany(Nasabah::class,Processing::class);
     }
 
-    // public function processing()
-    // {
-    //     return $this->hasManyThrough(User::class, Processing::class);
-    // }
+    public function processing()
+    {
+        return $this->hasManyThrough(User::class, Processing::class);
+    }
 }

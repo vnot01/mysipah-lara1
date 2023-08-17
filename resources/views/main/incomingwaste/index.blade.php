@@ -115,15 +115,18 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="types-name" class="form-label">Types Waste</label>
-                                    <select class="my-select2 form-select" name="type_id" data-width="100%">
+                                    <select class="my-select2 form-select" id="type_id"
+                                        name="type_id" data-width="100%">
                                         @forelse ($listTypes as $key => $item_Types)
-                                        <option name="type_id" value="{{ $item_Types->id }}">{{ $item_Types->nama }}</option>
+                                        <option name="type_id" value="{{ $item_Types->id }}"
+                                            data-nama="{{ $item_Types->nama }}">{{ $item_Types->nama }}</option>
                                         @empty
                                         <div class="alert alert-danger">
                                             <option value="-1">No Data Available.</option>
                                         </div>
                                         @endforelse
                                     </select>
+                                    <input name="type_name" id="type_name" type="hidden" class="form-control">
                                 </div>
                                 <div class="mb-3">
                                     <label for="manufactures-name" class="form-label">Manufactures Waste</label>
@@ -165,7 +168,7 @@
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>ID Customer</th>
+                    <th>Customer</th>
                     <th>Source</th>
                     <th>Type</th>
                     <th>Manufacture</th>
@@ -178,7 +181,7 @@
                   @forelse ($listProcessings as $key => $item)
                   <tr class="align-middle">
                     <td>{{ $key+1 }}</td>
-                    <td>{{ $item->nasabahs->user->name }} <br>
+                    <td>{{ $item->namaNasabah->user->name }} <br>
                         {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td>
                     <td>{{ $item->sources->nama }}</td>
                     <td>{{ $item->types->nama }}</td>
@@ -234,7 +237,13 @@
                 }
             });
         },1000);
+
+        $('#type_id').on('change',function(){
+            var typeName = $(this).children('option:selected').data('nama');
+            $('#type_name').val(typeName);
+        });
     });
+
 </script>
 
 @endsection

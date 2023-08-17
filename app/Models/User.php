@@ -31,9 +31,10 @@ class User extends Authenticatable
     //     // return $this->hasMany(Nasabah::class,'users_id');
     //     return $this->hasManyThrough(Nasabah::class, Processing::class);
     // }
-    public function nasabah(): HasOneThrough
+    public function nasabah(): hasManyThrough
     {
-        return $this->hasManyThrough(Nasabah::class, Processing::class,'users_id','nokartu');
+        return $this->hasManyThrough(Nasabah::class,
+            Processing::class,'users_id','nokartu');
     }
 
 

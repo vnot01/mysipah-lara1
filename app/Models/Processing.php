@@ -19,6 +19,11 @@ class Processing extends Model
         return $this->belongsTo(Nasabah::class, 'nasabahs_id');
     }
 
+    public function namaNasabah()
+    {
+        return $this->hasOneThrough(Nasabah::class, User::class);
+    }
+
     public function types()
     {
         return $this->belongsTo(Type::class, 'types_id');
