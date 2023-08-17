@@ -41,9 +41,9 @@ class ProcessingController extends Controller
             'volume' => 'required',
             'rfid' => 'required:nasabahs,nokartu',
         ]);
-        // $volLast =
-        // $volIn = $request->volume;
-        // $totalVol = $volIn+$volLast;
+        $volLast =
+        $volIn = $request->volume;
+        $totalVol = $volIn+$volLast;
 
         // Processing::insert([
         //     'sources_id'=>$request->sources_id,
