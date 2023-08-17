@@ -29,8 +29,8 @@ class Processing extends Model
         return $this->belongsTo(Manufacture::class, 'manufactures_id');
     }
 
-    public function locations()
+    public function inventories()
     {
-        return $this->belongsTo(Location::class, 'locations_id');
+        return $this->belongsTo(inventories::class, 'inventories_id');
     }
 }

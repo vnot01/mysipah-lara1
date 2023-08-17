@@ -13,16 +13,15 @@ class InventorySeeder extends Seeder
      */
     public function run(): void
     {
-        // DB::table('inventories')->insert([
-        //     [
-        //         'products_id'=>'Lainnya',
-        //         'process_id'=>'Lainnya',
-        //         'locations_id'=>'Lainnya',
-        //         'photo'=>'Lainnya',
-        //         'volume'=>'Lainnya',
-        //         'ukuran'=>'Lainnya',
-        //         'jumlah_produk'=>'Lainnya',
-        //     ],
-        // ]);
+        DB::table('inventories')->insert([
+            [
+                'products_id'=>'1',
+                'locations_id'=>'1',
+                // 'photo'=>'Lainnya',
+                // 'volume'=>'Lainnya',
+                // 'ukuran'=>'Lainnya',
+                // 'jumlah_produk'=>'Lainnya',
+            ],
+        ]);
     }
 }
