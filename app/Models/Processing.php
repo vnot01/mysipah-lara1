@@ -31,6 +31,6 @@ class Processing extends Model
 
     public function inventories()
     {
-        return $this->belongsTo(inventories::class, 'inventories_id');
+        return $this->belongsTo(Inventory::class, 'inventories_id');
     }
 }
