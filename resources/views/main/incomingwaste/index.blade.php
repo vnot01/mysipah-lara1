@@ -91,32 +91,19 @@
                                 </div>
                                 <div class="mb-3" name="nokartu" id="nokartu"></div>
                                 <div class="mb-3">
-                                    <label for="nasabah-name" class="form-label">No. RFID</label>
-                                    {{-- <select class="my-select2 form-select form-control" name="users_id">
-                                        <option>Select Item</option>
-                                        {{ $selectedID = '' }}
-                                        @foreach ($userData as $key => $value)
-                                            <option value="{{ $key }}"
-                                                {{ ( $key == $selectedID) ? 'selected' : '' }}>
-                                                {{ $value->name }}
-                                            </option>
-                                        @endforeach
-                                    </select> --}}
-                                        {{-- @foreach ($userData as $key => $value) --}}
+                                    <label for="rfid" class="form-label">No. RFID</label>
                                         <input type="text" readonly="true" class="form-control
                                             @error('rfid') is-invalid
                                             @enderror " value="{{ old('rfid', '')}}"
                                             id="rfid" name="rfid" autocomplete="off"
                                             placeholder="Leave Blank If Not Add New">
-                                        {{-- @endforeach --}}
-
                                             @error('rfid')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="sources-name" class="form-label">Sources Waste</label>
-                                    <select class="my-select2 form-select" data-width="100%">
+                                    <select class="my-select2 form-select" name="source_id" data-width="100%">
                                         @forelse ($listSources as $key => $item_source)
                                         <option name="source_id" value="{{ $item_source->id }}">{{ $item_source->nama }}</option>
                                         @empty
@@ -128,7 +115,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="types-name" class="form-label">Types Waste</label>
-                                    <select class="my-select2 form-select" data-width="100%">
+                                    <select class="my-select2 form-select" name="type_id" data-width="100%">
                                         @forelse ($listTypes as $key => $item_Types)
                                         <option name="type_id" value="{{ $item_Types->id }}">{{ $item_Types->nama }}</option>
                                         @empty
@@ -140,7 +127,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="manufactures-name" class="form-label">Manufactures Waste</label>
-                                    <select class="my-select2 form-select" data-width="100%">
+                                    <select class="my-select2 form-select" name="manufacture_id" data-width="100%">
                                         @forelse ($listManufactures as $key => $item_Manufactures)
                                         <option name="manufacture_id" value="{{ $item_Manufactures->id }}">{{ $item_Manufactures->nama }}</option>
                                         @empty
@@ -227,5 +214,27 @@
     </div>
 
   </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var self = $(this),
+        nokartu = self.data('nokartu');
+        id = self.data('id');
+        setInterval(function(){
+            $.ajax({
+                type:"GET",
+                url:"/incomingwaste/scan",
+                data: {
+                    nokartu: nokartu,
+                    id: id
+                },
+                dataType: 'json',
+                success:function(data)
+                {
+                    $('#rfid').val(data.nokartu);
+                }
+            });
+        },1000);
+    });
+</script>
 
 @endsection

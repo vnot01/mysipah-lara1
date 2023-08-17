@@ -81,9 +81,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         'DestroyIncomingWaste'])
         ->name('delete.incoming_waste');
     Route::post('/incomingwaste/add',[
-        NasabahController::class,
+        ProcessingController::class,
         'StoreNewIncomingWaste'])
         ->name('incomingwaste.add');
+    Route::get('/incomingwaste/scan',[NasabahController::class, 'getTempCard']
+        )->middleware(['auth', 'verified'])->name('scan.kartu');
 
     // Route::get('/all/sources','AllSources')->name('all.sources');
 

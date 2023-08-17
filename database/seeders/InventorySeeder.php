@@ -15,10 +15,10 @@ class InventorySeeder extends Seeder
     {
         DB::table('inventories')->insert([
             [
-                'products_id'=>'1',
-                'locations_id'=>'1',
+                // 'products_id'=>'1',
+                'types_id'=>'1',
                 // 'photo'=>'Lainnya',
-                // 'volume'=>'Lainnya',
+                'volume'=>'0.5',
                 // 'ukuran'=>'Lainnya',
                 // 'jumlah_produk'=>'Lainnya',
             ],

@@ -32,7 +32,7 @@ class ProcessingSeeder extends Seeder
                 // 'inventories_id'=>'1',
                 'volume'=>'3.5',
                 'total_volume'=>'3.5',
-                'remark'=>'in',
+                'remark'=>'warehouse',
                 'created_at'=>Carbon::now(),
             ],
             [
@@ -42,7 +42,7 @@ class ProcessingSeeder extends Seeder
                 // 'inventories_id'=>'1',
                 'volume'=>'3.5',
                 'total_volume'=>'7',
-                'remark'=>'in',
+                'remark'=>'warehouse',
                 'created_at'=>Carbon::now(),
             ],
             [
@@ -52,7 +52,7 @@ class ProcessingSeeder extends Seeder
                 // 'inventories_id'=>'1',
                 'volume'=>'1',
                 'total_volume'=>'8',
-                'remark'=>'in',
+                'remark'=>'warehouse',
                 'created_at'=>Carbon::now(),
             ],
             [
@@ -62,7 +62,7 @@ class ProcessingSeeder extends Seeder
                 // 'inventories_id'=>'1',
                 'volume'=>'2',
                 'total_volume'=>'10',
-                'remark'=>'in',
+                'remark'=>'warehouse',
                 'created_at'=>Carbon::now(),
             ],
             [
@@ -72,7 +72,17 @@ class ProcessingSeeder extends Seeder
                 // 'inventories_id'=>'1',
                 'volume'=>'0.5',
                 'total_volume'=>'10.5',
-                'remark'=>'out',
+                'remark'=>'warehouse',
+                'created_at'=>Carbon::now(),
+            ],
+            [
+                'sources_id'=>'5',
+                'types_id'=>'2',
+                'manufactures_id'=>'2',
+                // 'inventories_id'=>'1',
+                'volume'=>'0.5',
+                'total_volume'=>'10.5',
+                'remark'=>'in',
                 'created_at'=>Carbon::now(),
             ],
         ]);
