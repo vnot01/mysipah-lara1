@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventory;
 use App\Models\Manufacture;
+use App\Models\Nasabah;
 use App\Models\Processing;
 use App\Models\Source;
+use App\Models\TempCard;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +27,8 @@ class ProcessingController extends Controller
         $listTypes = Type::all();
         $listManufactures = Manufacture::all();
         $listProcessings = Processing::with(
-            'nasabahs','sources','types','manufactures','locations')->get();
+            'nasabahs','sources','types','manufactures','inventories','namaNasabah')
+            ->where('remark', '=', 'in')->get();
         return view('main.incomingwaste.index', [
             'profileData'=>$profileData,
             'listProcessings' => $listProcessings,
@@ -35,31 +40,89 @@ class ProcessingController extends Controller
     public function StoreNewIncomingWaste(Request $request)
     {
         $request->validate([
-            'source_id' => 'required:sources',
-            'type_id' => 'required:types',
-            'manufacture_id' => 'required:manufactures',
+            'source_id' => 'required',
+            'type_id' => 'required',
+            'manufacture_id' => 'required',
             'volume' => 'required',
             'rfid' => 'required:nasabahs,nokartu',
         ]);
-        // $volLast =
-        // $volIn = $request->volume;
-        // $totalVol = $volIn+$volLast;
+        $remark ='in';
+        $sourcesID =$request->source_id;
+        $typesID =$request->type_id;
+        $typesName =$request->type_name;
+        $manufacturesID =$request->manufacture_id;
+        $nasabahsID =$request->nasabahs_id;
+        $RFID =$request->rfid;
+        // $matchAndThese = ['types_id' => $typesID, 'another_field' => 'another_value'];
+        // $matchAndThese = ['types_id' => $typesID];
+        // if you need another group of wheres as an alternative:
+        // $matchOrThose = ['yet_another_field' => 'yet_another_value'];
+        // with another group
+        // $results = User::where($matchThese)
+        // ->orWhere($orThose)
+        // ->get();
+        // nasabahCanProcess
+        $cekNasabah = Inventory::with('nasabahs')
+            ->whereIn('nokartu', $RFID)
+            ->first();
+        foreach ($cekNasabah as $dataNasabah) {
+            $noKartu = $dataNasabah->nasabahs->nokartu;
+            $namaNasabah = $dataNasabah->nasabahs->nama;
+        }
 
-        Processing::insert([
-            'sources_id'=>$request->sources_id,
-            'types_id'=>$request->types_id,
-            'manufactures_id'=>$request->manufactures_id,
-            'nokartu'=>$request->rfid,
-            'volume'=>$request->volume,
-            'total_volume'=>$request->total_volume,
-            'nasabahs_id'=>$request->nasabahs_id,
-        ]);
+        return response()->json($cekNasabah);
+        $inventories = Inventory::where('types_id', '=', $typesID)
+        ->with('types','products')
+        ->get();
+        $cekDataInv = Inventory::where('types_id', '=', $typesID)->exists();
+        $notification = array();
+        $vol = 0;
+        if ($cekDataInv) {
+            foreach ($inventories as $inv) {
+                if (is_null($inv->volume)) {
+                    $vol = 0;
+                }else{
+                    $vol = $inv->volume;
+                }
+                // $notification = array(
+                //     'message' => 'Sources Create Successfully',
+                //     'alert-type' => 'success',
+                //     'id'         => $inv->id,
+                //     'Types'         => $inv->types->nama,
+                //     'vol'      => $vol,
+                // );
+                $volLast = $vol;
+                $typeName = $inv->types->nama;
+            }
+        }else{
+            $volLast = $vol;
+            $typeName = $typesName;
+        }
+        // return response()->json($notification);
+        // $volLast = $inv->volume;
+        $volIn = $request->volume;
+        $totalVolNow = $volIn+$volLast;
+        // Processing::insert([
+        //     'sources_id'=>$sourcesID,
+        //     'types_id'=>$typesID,
+        //     'manufactures_id'=>$manufacturesID,
+        //     'nokartu'=>$RFID,
+        //     'volume'=>$volIn,
+        //     'total_volume'=>$totalVolNow,
+        //     'nasabahs_id'=>$nasabahsID,
+        //     'remark'=>$remark,
+        // ]);
 
         $notification = array(
             'message' => 'Incoming Process Waste Create Successfully',
-            'alert-type' => 'success'
+            'alert-type' => 'success',
+            // 'Type' => $typeName,
+            // 'vol In' => $volIn,
+            // 'total Vol Now' => $totalVolNow,
         );
-        return redirect()->back()->with($notification);
+
+        // return redirect()->back()->with($notification);
+        // return response()->json($notification);
     }
 
     public function DestroyIncomingWaste($id)

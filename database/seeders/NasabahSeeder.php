@@ -17,7 +17,7 @@ class NasabahSeeder extends Seeder
         DB::table('nasabahs')->insert([
             [
                 'users_id'=>'1',
-                'nokartu'=>'xxxxxxxxxxx',
+                'nokartu'=>'XXXXXXXXXXX',
             ],
             [
                 'users_id'=>'5',

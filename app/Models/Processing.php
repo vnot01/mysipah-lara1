@@ -19,6 +19,11 @@ class Processing extends Model
         return $this->belongsTo(Nasabah::class, 'nasabahs_id');
     }
 
+    public function namaNasabah()
+    {
+        return $this->hasOneThrough(Nasabah::class, User::class);
+    }
+
     public function types()
     {
         return $this->belongsTo(Type::class, 'types_id');
@@ -29,8 +34,8 @@ class Processing extends Model
         return $this->belongsTo(Manufacture::class, 'manufactures_id');
     }
 
-    public function locations()
+    public function inventories()
     {
-        return $this->belongsTo(Location::class, 'locations_id');
+        return $this->belongsTo(Inventory::class, 'inventories_id');
     }
 }
