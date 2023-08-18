@@ -21,7 +21,7 @@ class Processing extends Model
 
     public function namaNasabah()
     {
-        return $this->hasOneThrough(Nasabah::class, User::class);
+        return $this->belongsTo(User::class, Nasabah::class);
     }
 
     public function types()
