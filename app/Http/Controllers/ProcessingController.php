@@ -65,7 +65,6 @@ class ProcessingController extends Controller
         // $results = User::where($matchThese)
         // ->orWhere($orThose)
         // ->get();
-
         // nasabahCanProcess
         $cekNasabah = Nasabah::with('user')
             ->where('nokartu','=',$RFID)
@@ -73,65 +72,78 @@ class ProcessingController extends Controller
         // $cekNasabah = Processing::with('namaNasabah')
         //     ->where('nokartu','=',$RFID)
         //     ->get();
-        foreach ($cekNasabah as $dataNasabah) {
-            $noKartu = $dataNasabah->nokartu;
-            $namaNasabah = $dataNasabah->user->name;
-            $idNasabah = $dataNasabah->id;
-        }
-
-        $inventories = Inventory::where('types_id', '=', $typesID)
-            ->with('types','products')
-            ->get();
-        $cekDataInv = Inventory::where('types_id', '=', $typesID)->exists();
-        $notification = array();
-        $vol = 0;
-        if ($cekDataInv) {
-            foreach ($inventories as $inv) {
-                if (is_null($inv->volume)) {
-                    $vol = 0;
+        if ($cekNasabah) {
+            foreach ($cekNasabah as $dataNasabah) {
+                $noKartu = $dataNasabah->nokartu;
+                $namaNasabah = $dataNasabah->user->name;
+                $idNasabah = $dataNasabah->id;
+            }
+            if (!empty($noKartu)) {
+                $inventories = Inventory::where('types_id', '=', $typesID)
+                    ->with('types','products')
+                    ->get();
+                $cekDataInv = Inventory::where('types_id', '=', $typesID)->exists();
+                $notification = array();
+                $vol = 0;
+                if ($cekDataInv) {
+                    foreach ($inventories as $inv) {
+                        if (is_null($inv->volume)) {
+                            $vol = 0;
+                        }else{
+                            $vol = $inv->volume;
+                        }
+                        // $notification = array(
+                        //     'message' => 'Sources Create Successfully',
+                        //     'alert-type' => 'success',
+                        //     'id'         => $inv->id,
+                        //     'Types'         => $inv->types->nama,
+                        //     'vol'      => $vol,
+                        // );
+                        $volLast = $vol;
+                        $typeName = $inv->types->nama;
+                    }
                 }else{
-                    $vol = $inv->volume;
+                    $volLast = $vol;
+                    $typeName = $typesName;
                 }
-                // $notification = array(
-                //     'message' => 'Sources Create Successfully',
-                //     'alert-type' => 'success',
-                //     'id'         => $inv->id,
-                //     'Types'         => $inv->types->nama,
-                //     'vol'      => $vol,
-                // );
-                $volLast = $vol;
-                $typeName = $inv->types->nama;
+                // return response()->json($notification);
+                // $volLast = $inv->volume;
+                $volIn = $request->volume;
+                $totalVolNow = $volIn+$volLast;
+                // Processing::insert([
+                //     'sources_id'=>$sourcesID,
+                //     'types_id'=>$typesID,
+                //     'manufactures_id'=>$manufacturesID,
+                //     'nokartu'=>$RFID,
+                //     'volume'=>$volIn,
+                //     'total_volume'=>$totalVolNow,
+                //     'nasabahs_id'=>$idNasabah,
+                //     'remark'=>$this->remarkIn,
+                //     'created_at'=>Carbon::now(),
+                // ]);
+        
+                $notification = array(
+                    'message' => 'Incoming Process Waste Create Successfully',
+                    'alert-type' => 'success',
+                    'Type' => $typeName,
+                    'vol In' => $volIn,
+                    'total Vol Now' => $totalVolNow,
+                    'noKartu' => $noKartu,
+                    'idNasabah' => $idNasabah,
+                    'namaNasabah' => $namaNasabah,
+                );
+            }else{
+                $notification = array(
+                    'message' => 'Incoming Process Waste Failed',
+                    'alert-type' => 'error'
+                );
             }
         }else{
-            $volLast = $vol;
-            $typeName = $typesName;
+            $notification = array(
+                'message' => 'Incoming Process Waste Failed',
+                'alert-type' => 'error'
+            );
         }
-        // return response()->json($notification);
-        // $volLast = $inv->volume;
-        $volIn = $request->volume;
-        $totalVolNow = $volIn+$volLast;
-        Processing::insert([
-            'sources_id'=>$sourcesID,
-            'types_id'=>$typesID,
-            'manufactures_id'=>$manufacturesID,
-            'nokartu'=>$RFID,
-            'volume'=>$volIn,
-            'total_volume'=>$totalVolNow,
-            'nasabahs_id'=>$idNasabah,
-            'remark'=>$this->remarkIn,
-            'created_at'=>Carbon::now(),
-        ]);
-
-        $notification = array(
-            'message' => 'Incoming Process Waste Create Successfully',
-            'alert-type' => 'success',
-            'Type' => $typeName,
-            'vol In' => $volIn,
-            'total Vol Now' => $totalVolNow,
-            'noKartu' => $noKartu,
-            'idNasabah' => $idNasabah,
-            'namaNasabah' => $namaNasabah,
-        );
 
         return redirect()->back()->with($notification);
         // return response()->json($notification);

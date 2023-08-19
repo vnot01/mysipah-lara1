@@ -87,6 +87,50 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/incomingwaste/scan',[NasabahController::class, 'getTempCard']
         )->middleware(['auth', 'verified'])->name('scan.kartu');
 
+    Route::get('/main/processing', [
+        ProcessingController::class,
+        'incomingWasteIndex'
+        ])->name('main.processing');
+    Route::post('/main/processing/delete/{id}',[
+            ProcessingController::class,
+        'DestroyIncomingWaste'])
+        ->name('delete.processing');
+    Route::post('/processing/add',[
+        ProcessingController::class,
+        'StoreNewIncomingWaste'])
+        ->name('processing.add');
+    Route::get('/processing/scan',[NasabahController::class, 'getTempCard']
+            )->middleware(['auth', 'verified'])->name('scan.kartu');
+
+    Route::get('/main/queue', [
+        ProcessingController::class,
+        'incomingWasteIndex'
+        ])->name('main.queue');
+    Route::post('/main/queue/delete/{id}',[
+            ProcessingController::class,
+        'DestroyIncomingWaste'])
+        ->name('delete.queue');
+    Route::post('/queue/add',[
+        ProcessingController::class,
+        'StoreNewIncomingWaste'])
+        ->name('queue.add');
+    Route::get('/queue/scan',[NasabahController::class, 'getTempCard']
+            )->middleware(['auth', 'verified'])->name('scan.kartu');
+
+    Route::get('/main/warehouse', [
+        ProcessingController::class,
+        'incomingWasteIndex'
+        ])->name('main.warehouse');
+    Route::post('/main/queue/delete/{id}',[
+            ProcessingController::class,
+        'DestroyIncomingWaste'])
+        ->name('delete.warehouse');
+    Route::post('/warehouse/add',[
+        ProcessingController::class,
+        'StoreNewIncomingWaste'])
+        ->name('warehouse.add');
+    Route::get('/warehouse/scan',[NasabahController::class, 'getTempCard']
+            )->middleware(['auth', 'verified'])->name('scan.kartu');
     // Route::get('/all/sources','AllSources')->name('all.sources');
 
     // Route::get('/all/sources', [
