@@ -10,6 +10,7 @@ use App\Models\Source;
 use App\Models\TempCard;
 use App\Models\Type;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Auth;
 class ProcessingController extends Controller
 {
     //
+    private $remarkIn ='in';
+    private $remarkOut ='out';
+    private $remarkWarehouse ='warehouse';
     public function incomingWasteIndex(): View
     {
         $id=Auth::user()->id;
@@ -28,7 +32,7 @@ class ProcessingController extends Controller
         $listManufactures = Manufacture::all();
         $listProcessings = Processing::with(
             'nasabahs','sources','types','manufactures','inventories','namaNasabah')
-            ->where('remark', '=', 'in')->get();
+            ->where('remark', '=', $this->remarkIn)->get();
         return view('main.incomingwaste.index', [
             'profileData'=>$profileData,
             'listProcessings' => $listProcessings,
@@ -46,12 +50,12 @@ class ProcessingController extends Controller
             'volume' => 'required',
             'rfid' => 'required:nasabahs,nokartu',
         ]);
-        $remark ='in';
+        // $remark ='in';
         $sourcesID =$request->source_id;
         $typesID =$request->type_id;
         $typesName =$request->type_name;
         $manufacturesID =$request->manufacture_id;
-        $nasabahsID =$request->nasabahs_id;
+        // $nasabahsID =$request->nasabahs_id;/
         $RFID =$request->rfid;
         // $matchAndThese = ['types_id' => $typesID, 'another_field' => 'another_value'];
         // $matchAndThese = ['types_id' => $typesID];
@@ -61,19 +65,23 @@ class ProcessingController extends Controller
         // $results = User::where($matchThese)
         // ->orWhere($orThose)
         // ->get();
+
         // nasabahCanProcess
-        $cekNasabah = Inventory::with('nasabahs')
-            ->whereIn('nokartu', $RFID)
-            ->first();
+        $cekNasabah = Nasabah::with('user')
+            ->where('nokartu','=',$RFID)
+            ->get();
+        // $cekNasabah = Processing::with('namaNasabah')
+        //     ->where('nokartu','=',$RFID)
+        //     ->get();
         foreach ($cekNasabah as $dataNasabah) {
-            $noKartu = $dataNasabah->nasabahs->nokartu;
-            $namaNasabah = $dataNasabah->nasabahs->nama;
+            $noKartu = $dataNasabah->nokartu;
+            $namaNasabah = $dataNasabah->user->name;
+            $idNasabah = $dataNasabah->id;
         }
 
-        return response()->json($cekNasabah);
         $inventories = Inventory::where('types_id', '=', $typesID)
-        ->with('types','products')
-        ->get();
+            ->with('types','products')
+            ->get();
         $cekDataInv = Inventory::where('types_id', '=', $typesID)->exists();
         $notification = array();
         $vol = 0;
@@ -102,27 +110,33 @@ class ProcessingController extends Controller
         // $volLast = $inv->volume;
         $volIn = $request->volume;
         $totalVolNow = $volIn+$volLast;
-        // Processing::insert([
-        //     'sources_id'=>$sourcesID,
-        //     'types_id'=>$typesID,
-        //     'manufactures_id'=>$manufacturesID,
-        //     'nokartu'=>$RFID,
-        //     'volume'=>$volIn,
-        //     'total_volume'=>$totalVolNow,
-        //     'nasabahs_id'=>$nasabahsID,
-        //     'remark'=>$remark,
-        // ]);
+        Processing::insert([
+            'sources_id'=>$sourcesID,
+            'types_id'=>$typesID,
+            'manufactures_id'=>$manufacturesID,
+            'nokartu'=>$RFID,
+            'volume'=>$volIn,
+            'total_volume'=>$totalVolNow,
+            'nasabahs_id'=>$idNasabah,
+            'remark'=>$this->remarkIn,
+            'created_at'=>Carbon::now(),
+        ]);
 
         $notification = array(
             'message' => 'Incoming Process Waste Create Successfully',
             'alert-type' => 'success',
-            // 'Type' => $typeName,
-            // 'vol In' => $volIn,
-            // 'total Vol Now' => $totalVolNow,
+            'Type' => $typeName,
+            'vol In' => $volIn,
+            'total Vol Now' => $totalVolNow,
+            'noKartu' => $noKartu,
+            'idNasabah' => $idNasabah,
+            'namaNasabah' => $namaNasabah,
         );
 
-        // return redirect()->back()->with($notification);
+        return redirect()->back()->with($notification);
         // return response()->json($notification);
+        // return response()->json($cekNasabah);
+        // return response()->json($RFID);
     }
 
     public function DestroyIncomingWaste($id)

@@ -26,6 +26,9 @@ return new class extends Migration
                 ->nullable()->default('in');
             $table->timestamps();
         });
+        Schema::table('processings', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**

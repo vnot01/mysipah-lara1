@@ -18,6 +18,9 @@ return new class extends Migration
             $table->boolean('status')->default(0);
             $table->timestamps();
         });
+        Schema::table('processing_statuses', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**

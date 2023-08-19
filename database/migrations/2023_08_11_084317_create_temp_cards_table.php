@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('nokartu')->default('xxxxxxxxxxx');
             $table->timestamps();
         });
+        Schema::table('temp_cards', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**

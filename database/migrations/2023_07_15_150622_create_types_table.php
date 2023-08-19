@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('nama')->nullable();
             $table->timestamps();
         });
+        Schema::table('types', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**

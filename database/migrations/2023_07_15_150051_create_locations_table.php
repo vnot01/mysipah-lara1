@@ -18,6 +18,9 @@ return new class extends Migration
             $table->text('long')->nullable();
             $table->timestamps();
         });
+        Schema::table('locations', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**

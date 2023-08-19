@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('alasan')->nullable();
             $table->timestamps();
         });
+        Schema::table('api_access', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**

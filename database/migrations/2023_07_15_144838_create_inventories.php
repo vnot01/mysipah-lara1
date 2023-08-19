@@ -23,6 +23,9 @@ return new class extends Migration
             $table->double('jumlah_produk')->nullable();
             $table->timestamps();
         });
+        Schema::table('inventories', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**

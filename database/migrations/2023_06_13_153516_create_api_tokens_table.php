@@ -19,11 +19,16 @@ return new class extends Migration
             $table->string('api_tokens')->nullable();
             $table->string('token_type')->nullable()->default('Bearer');
             $table->timestamps();
+            $table->softDeletes();
         });
         Schema::table('api_tokens', function (Blueprint $table) {
             $table->foreignId('tokenable_id')->constrained(
                 table: 'personal_access_tokens', indexName: 'personal_access_id'
             )->onDelete('cascade');
+        });
+
+        Schema::table('api_tokens', function (Blueprint $table) {
+            $table->softDeletes();
         });
         // Schema::table('api_tokens', function (Blueprint $table) {
         //     $table->foreign('personal_access_id')
