@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 // use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\Nasabah\NasabahController;
 use App\Http\Controllers\Operator\OperatorController;
@@ -117,19 +118,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/queue/scan',[NasabahController::class, 'getTempCard']
             )->middleware(['auth', 'verified'])->name('scan.kartu');
 
-    Route::get('/main/warehouse', [
-        ProcessingController::class,
+    Route::get('/main/inventory', [
+        InventoryController::class,
         'incomingWasteIndex'
-        ])->name('main.warehouse');
+        ])->name('main.inventory');
     Route::post('/main/queue/delete/{id}',[
-            ProcessingController::class,
+        InventoryController::class,
         'DestroyIncomingWaste'])
-        ->name('delete.warehouse');
-    Route::post('/warehouse/add',[
-        ProcessingController::class,
+        ->name('delete.inventory');
+    Route::post('/inventory/add',[
+        InventoryController::class,
         'StoreNewIncomingWaste'])
-        ->name('warehouse.add');
-    Route::get('/warehouse/scan',[NasabahController::class, 'getTempCard']
+        ->name('inventory.add');
+    Route::get('/inventory/scan',[NasabahController::class, 'getTempCard']
             )->middleware(['auth', 'verified'])->name('scan.kartu');
     // Route::get('/all/sources','AllSources')->name('all.sources');
 

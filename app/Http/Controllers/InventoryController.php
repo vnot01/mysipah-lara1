@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Inventory;
 use App\Models\Manufacture;
 use App\Models\Nasabah;
@@ -16,7 +15,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ProcessingController extends Controller
+class InventoryController extends Controller
 {
     //
     private $remarkIn ='in';
@@ -30,11 +29,17 @@ class ProcessingController extends Controller
         $listSources = Source::all();
         $listTypes = Type::all();
         $listManufactures = Manufacture::all();
+        $listInventory = Inventory::with(
+            'sources','types','manufactures','products')
+            // ->where('remark', '=', $this->remarkIn)
+            ->get();
         $listProcessings = Processing::with(
             'nasabahs','sources','types','manufactures','namaNasabah')
-            ->where('remark', '=', $this->remarkIn)->get();
-        return view('main.incomingwaste.index', [
+            // ->where('remark', '=', $this->remarkIn)
+            ->get();
+        return view('main.inventories.index', [
             'profileData'=>$profileData,
+            'listInventory'=>$listInventory,
             'listProcessings' => $listProcessings,
             'listSources'=>$listSources,
             'listTypes'=>$listTypes,

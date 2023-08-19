@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sources_id')->nullable()->default(1);
             $table->unsignedBigInteger('types_id')->nullable()->default(1);
             $table->unsignedBigInteger('manufactures_id')->nullable()->default(1);
-            // $table->unsignedBigInteger('inventories_id')->nullable()->default(1);
+            $table->unsignedBigInteger('inventories_id')->nullable()->default(1);
             $table->unsignedBigInteger('nasabahs_id')->nullable()->default(1);
             $table->string('nokartu')->nullable()->default('XXXXXXXXXXX');
             $table->string('volume')->nullable();

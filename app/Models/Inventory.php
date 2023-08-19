@@ -21,4 +21,21 @@ class Inventory extends Model
     {
         return $this->belongsTo(Product::class, 'products_id');
     }
+    public function sources()
+    {
+        return $this->belongsTo(Source::class, 'sources_id');
+    }
+
+    public function manufactures()
+    {
+        return $this->belongsTo(Manufacture::class, 'manufactures_id');
+    }
+
+    public function inventories(){
+        return $this->hasMany(Processing::class,'inventories_id');
+    }
+    // public function inventories()
+    // {
+    //     return $this->belongsTo(Inventory::class, 'inventories_id');
+    // }
 }
