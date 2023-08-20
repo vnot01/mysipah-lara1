@@ -33,6 +33,7 @@ use App\Http\Controllers\Warehouse\WarehouseController;
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
+require __DIR__ . '/auth.php';
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -330,6 +331,3 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
 // Route::get('/warehouse/dashboard',[WarehouseController::class,'WarehouseDashboard'])->name('warehouse.dashboard');
 // Route::get('/operator/dashboard',[OperatorController::class,'OperatorDashboard'])->name('operator.dashboard');
 // Route::get('/user/dashboard',[UserController::class,'UserDashboard'])->name('user.dashboard');
-
-
-require __DIR__ . '/auth.php';

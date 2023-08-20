@@ -41,8 +41,147 @@
                 </li>
                 </ul>
                 <div class="tab-content border border-top-0 p-3" id="myTabContent">
+                    {{-- All Tab --}}
                     <div class="tab-pane fade show active" 
                         id="all" role="tabpanel" aria-labelledby="all-tab">
+                        <div class="table-responsive">
+                        <table id="dataTableExample" class="table">
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Product</th>
+                                <th>Type</th>
+                                <th>Location</th>
+                                <th>Vol (kg)</th>
+                                <th>Size (cm)</th>
+                                <th>Amount (qty)</th>
+                                <th>Photo</th>
+                                {{-- <th>Last Update</th> --}}
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse ($listProcessingsAll as $key => $item)
+                            <tr class="align-middle">
+                                <td>{{ $key+1 }}</td>
+                                <td>{{ $item->nasabahs->user->name }} <br>
+                                    {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td>
+                                <td>{{ $item->types->nama }}</td>
+                                <td>{{ $item->location_id }}</td>
+                                <td>{{ $item->volume }}</td>
+                                <td>{{ $item->ukuran }}</td>
+                                <td>{{ $item->jumlah_produk }}</td>
+                                <td>{{ $item->photo }}</td>
+                                {{-- <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td> --}}
+                                <td class="text-start">
+                                    <img src="{{ url('/upload/images/'.$item->remark.'.png') }}"
+                                            style="height: 50px;width:50px;" >
+                                </td>
+                            </tr>
+                            @empty
+                                <div class="alert alert-danger">
+                                    No Data Available.
+                                </div>
+                            @endforelse
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    {{-- Incoming Tab --}}
+                    <div class="tab-pane fade" 
+                        id="in" role="tabpanel" aria-labelledby="out-tab">
+                        <div class="table-responsive">
+                        <table id="dataTableExample" class="table">
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Product</th>
+                                <th>Type</th>
+                                <th>Location</th>
+                                <th>Vol (kg)</th>
+                                <th>Size (cm)</th>
+                                <th>Amount (qty)</th>
+                                <th>Photo</th>
+                                {{-- <th>Last Update</th> --}}
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse ($listProcessingsIn as $key => $item)
+                            <tr class="align-middle">
+                                <td>{{ $key+1 }}</td>
+                                <td>{{ $item->nasabahs->user->name }} <br>
+                                    {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td>
+                                <td>{{ $item->types->nama }}</td>
+                                <td>{{ $item->location_id }}</td>
+                                <td>{{ $item->volume }}</td>
+                                <td>{{ $item->ukuran }}</td>
+                                <td>{{ $item->jumlah_produk }}</td>
+                                <td>{{ $item->photo }}</td>
+                                {{-- <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td> --}}
+                                <td class="text-start">
+                                    <img src="{{ url('/upload/images/'.$item->remark.'.png') }}"
+                                            style="height: 50px;width:50px;" >
+                                </td>
+                            </tr>
+                            @empty
+                                <div class="alert alert-danger">
+                                    No Data Available.
+                                </div>
+                            @endforelse
+                            </tbody>
+                        </table>
+                        </div>    
+                    </div>
+                    <div class="tab-pane fade" 
+                        id="out" role="tabpanel" aria-labelledby="out-tab">
+                        {{-- OUTCOMING Tab --}}
+                        <div class="table-responsive">
+                        <table id="dataTableExample" class="table">
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Product</th>
+                                <th>Type</th>
+                                <th>Location</th>
+                                <th>Vol (kg)</th>
+                                <th>Size (cm)</th>
+                                <th>Amount (qty)</th>
+                                <th>Photo</th>
+                                {{-- <th>Last Update</th> --}}
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse ($listProcessingsOut as $key => $item)
+                            <tr class="align-middle">
+                                <td>{{ $key+1 }}</td>
+                                <td>{{ $item->nasabahs->user->name }} <br>
+                                    {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td>
+                                <td>{{ $item->types->nama }}</td>
+                                <td>{{ $item->location_id }}</td>
+                                <td>{{ $item->volume }}</td>
+                                <td>{{ $item->ukuran }}</td>
+                                <td>{{ $item->jumlah_produk }}</td>
+                                <td>{{ $item->photo }}</td>
+                                {{-- <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td> --}}
+                                <td class="text-start">
+                                    <img src="{{ url('/upload/images/'.$item->remark.'.png') }}"
+                                            style="height: 50px;width:50px;" >
+                                </td>
+                            </tr>
+                            @empty
+                                <div class="alert alert-danger">
+                                    No Data Available.
+                                </div>
+                            @endforelse
+                            </tbody>
+                        </table>
+                        </div> 
+                    </div>
+                    <div class="tab-pane fade" 
+                        id="process" role="tabpanel" aria-labelledby="process-tab">
+                        {{-- PROCESSING Tab --}}
                         <div class="table-responsive">
                         <table id="dataTableExample" class="table">
                             <thead>
@@ -84,14 +223,8 @@
                             @endforelse
                             </tbody>
                         </table>
-                        </div>
+                        </div> 
                     </div>
-                    <div class="tab-pane fade" 
-                        id="in" role="tabpanel" aria-labelledby="out-tab">INCOMING</div>
-                    <div class="tab-pane fade" 
-                        id="out" role="tabpanel" aria-labelledby="out-tab">OUTCOMING</div>
-                    <div class="tab-pane fade" 
-                        id="process" role="tabpanel" aria-labelledby="process-tab">PROCESSING</div>
                 </div>
           </div>
         </div>

@@ -33,14 +33,29 @@ class InventoryController extends Controller
             'sources','types','manufactures','products')
             // ->where('remark', '=', $this->remarkIn)
             ->get();
-        $listProcessings = Processing::with(
+        $listProcessingsAll = Processing::with(
             'nasabahs','sources','types','manufactures','namaNasabah')
             // ->where('remark', '=', $this->remarkIn)
+            ->get();
+        $listProcessingsIn = Processing::with(
+            'nasabahs','sources','types','manufactures','namaNasabah')
+            ->where('remark', '=', $this->remarkIn)
+            ->get();
+        $listProcessingsOut = Processing::with(
+            'nasabahs','sources','types','manufactures','namaNasabah')
+            ->where('remark', '=', $this->remarkOut)
+            ->get();
+        $listProcessings = Processing::with(
+            'nasabahs','sources','types','manufactures','namaNasabah')
+            ->where('remark', '=', $this->remarkWarehouse)
             ->get();
         return view('main.inventories.index', [
             'profileData'=>$profileData,
             'listInventory'=>$listInventory,
             'listProcessings' => $listProcessings,
+            'listProcessingsAll'=> $listProcessingsAll,
+            'listProcessingsIn'=> $listProcessingsIn,
+            'listProcessingsOut'=> $listProcessingsOut,
             'listSources'=>$listSources,
             'listTypes'=>$listTypes,
             'listManufactures'=>$listManufactures]);
