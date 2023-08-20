@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('warehouses_table', function (Blueprint $table) {
+        Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sources_id')->nullable()->default(1);
             $table->unsignedBigInteger('types_id')->nullable()->default(1);
@@ -24,7 +24,7 @@ return new class extends Migration
                 ->nullable()->default('in');
             $table->timestamps();
         });
-        Schema::table('warehouses_table', function (Blueprint $table) {
+        Schema::table('warehouses', function (Blueprint $table) {
             $table->softDeletes();
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('warehouses_table');
+        Schema::dropIfExists('warehouses');
     }
 };
