@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('nama');
             $table->timestamps();
         });
+        Schema::table('status_alats', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**

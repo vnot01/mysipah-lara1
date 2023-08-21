@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 
 class Processing extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable,SoftDeletes;
     protected $guarded = [];
     public function sources()
     {
@@ -21,7 +23,7 @@ class Processing extends Model
 
     public function namaNasabah()
     {
-        return $this->hasOneThrough(Nasabah::class, User::class);
+        return $this->belongsTo(User::class, Nasabah::class);
     }
 
     public function types()
@@ -34,8 +36,16 @@ class Processing extends Model
         return $this->belongsTo(Manufacture::class, 'manufactures_id');
     }
 
-    public function inventories()
-    {
-        return $this->belongsTo(Inventory::class, 'inventories_id');
+    public function processingStatus(){
+        return $this->belongsTo(ProcessingStatus::class,'processings_id');
     }
+
+    public function processingHasProducts(){
+        return $this->hasManyThrough(ProcessingStatus::class,Processing::class,'id','processing_id');
+    }
+
+    // public function inventories()
+    // {
+    //     return $this->belongsTo(Inventory::class, 'inventories_id');
+    // }
 }

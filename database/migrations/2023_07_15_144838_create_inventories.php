@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('products_id')->nullable()->default(1);
-            $table->unsignedBigInteger('processings_id')->nullable()->default(1);
+            // $table->unsignedBigInteger('processings_id')->nullable()->default(1);
             $table->unsignedBigInteger('types_id')->nullable()->default(1);
             $table->unsignedBigInteger('locations_id')->nullable()->default(1);
             $table->string('photo')->nullable();
@@ -22,6 +22,9 @@ return new class extends Migration
             $table->double('ukuran')->nullable();
             $table->double('jumlah_produk')->nullable();
             $table->timestamps();
+        });
+        Schema::table('inventories', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 

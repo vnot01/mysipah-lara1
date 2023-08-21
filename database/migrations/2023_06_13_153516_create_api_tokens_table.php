@@ -25,6 +25,10 @@ return new class extends Migration
                 table: 'personal_access_tokens', indexName: 'personal_access_id'
             )->onDelete('cascade');
         });
+
+        Schema::table('api_tokens', function (Blueprint $table) {
+            $table->softDeletes();
+        });
         // Schema::table('api_tokens', function (Blueprint $table) {
         //     $table->foreign('personal_access_id')
         //           ->references('tokenable_id')

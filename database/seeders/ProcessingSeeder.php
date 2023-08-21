@@ -85,6 +85,16 @@ class ProcessingSeeder extends Seeder
                 'remark'=>'in',
                 'created_at'=>Carbon::now(),
             ],
+            [
+                'sources_id'=>'1',
+                'types_id'=>'1',
+                'manufactures_id'=>'2',
+                // 'inventories_id'=>'1',
+                'volume'=>'0.5',
+                'total_volume'=>'10',
+                'remark'=>'out',
+                'created_at'=>Carbon::now(),
+            ],
         ]);
     }
 }

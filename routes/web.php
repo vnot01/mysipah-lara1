@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 // use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\Nasabah\NasabahController;
 use App\Http\Controllers\Operator\OperatorController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\Warehouse\WarehouseController;
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
+require __DIR__ . '/auth.php';
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -86,7 +88,59 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->name('incomingwaste.add');
     Route::get('/incomingwaste/scan',[NasabahController::class, 'getTempCard']
         )->middleware(['auth', 'verified'])->name('scan.kartu');
+    Route::get('/incomingwaste/vol',[NasabahController::class, 'getTempVol']
+        )->middleware(['auth', 'verified'])->name('get.vol');
 
+    Route::get('/main/processing', [
+        ProcessingController::class,
+        'incomingWasteIndex'
+        ])->name('main.processing');
+    Route::post('/main/processing/delete/{id}',[
+            ProcessingController::class,
+        'DestroyIncomingWaste'])
+        ->name('delete.processing');
+    Route::post('/processing/add',[
+        ProcessingController::class,
+        'StoreNewIncomingWaste'])
+        ->name('processing.add');
+    Route::get('/processing/scan',[NasabahController::class, 'getTempCard']
+            )->middleware(['auth', 'verified'])->name('scan.kartu');
+    Route::get('/processing/vol',[NasabahController::class, 'getTempVol']
+        )->middleware(['auth', 'verified'])->name('get.vol');
+
+    Route::get('/main/queue', [
+        ProcessingController::class,
+        'incomingWasteIndex'
+        ])->name('main.queue');
+    Route::post('/main/queue/delete/{id}',[
+            ProcessingController::class,
+        'DestroyIncomingWaste'])
+        ->name('delete.queue');
+    Route::post('/queue/add',[
+        ProcessingController::class,
+        'StoreNewIncomingWaste'])
+        ->name('queue.add');
+    Route::get('/queue/scan',[NasabahController::class, 'getTempCard']
+            )->middleware(['auth', 'verified'])->name('scan.kartu');
+    Route::get('/queue/vol',[NasabahController::class, 'getTempVol']
+        )->middleware(['auth', 'verified'])->name('get.vol');
+
+    Route::get('/main/inventory', [
+        InventoryController::class,
+        'incomingWasteIndex'
+        ])->name('main.inventory');
+    Route::post('/main/queue/delete/{id}',[
+        InventoryController::class,
+        'DestroyIncomingWaste'])
+        ->name('delete.inventory');
+    Route::post('/inventory/add',[
+        InventoryController::class,
+        'StoreNewIncomingWaste'])
+        ->name('inventory.add');
+    Route::get('/inventory/scan',[NasabahController::class, 'getTempCard']
+            )->middleware(['auth', 'verified'])->name('scan.kartu');
+    Route::get('/inventory/vol',[NasabahController::class, 'getTempVol']
+        )->middleware(['auth', 'verified'])->name('get.vol');
     // Route::get('/all/sources','AllSources')->name('all.sources');
 
     // Route::get('/all/sources', [
@@ -285,6 +339,3 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
 // Route::get('/warehouse/dashboard',[WarehouseController::class,'WarehouseDashboard'])->name('warehouse.dashboard');
 // Route::get('/operator/dashboard',[OperatorController::class,'OperatorDashboard'])->name('operator.dashboard');
 // Route::get('/user/dashboard',[UserController::class,'UserDashboard'])->name('user.dashboard');
-
-
-require __DIR__ . '/auth.php';

@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('temp_vols', function (Blueprint $table) {
             $table->id();
-            $table->string('nama')->nullable();
+            $table->string('volume')->default('0');
             $table->timestamps();
         });
-        Schema::table('types', function (Blueprint $table) {
-            $table->softDeletes();
-        });
+
+        // Schema::table('temp_vols', function (Blueprint $table) {
+        //     $table->softDeletes();
+        // });
     }
 
     /**
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('temp_vol');
     }
 };

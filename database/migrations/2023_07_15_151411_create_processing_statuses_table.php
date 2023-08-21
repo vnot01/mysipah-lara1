@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('processing_statuses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('processings_id')->nullable()->default(1);
+            $table->unsignedBigInteger('processing_id')->nullable()->default(1);
             $table->unsignedBigInteger('products_id')->nullable()->default(1);
+            $table->string('volume')->nullable()->default(0);
             $table->boolean('status')->default(0);
             $table->timestamps();
+        });
+        Schema::table('processing_statuses', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 

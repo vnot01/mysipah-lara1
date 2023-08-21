@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Inventory;
 use App\Models\Manufacture;
 use App\Models\Nasabah;
 use App\Models\Processing;
+use App\Models\ProcessingStatus;
 use App\Models\Source;
 use App\Models\TempCard;
 use App\Models\Type;
@@ -16,13 +16,13 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ProcessingController extends Controller
+class InventoryController extends Controller
 {
     //
     private $remarkIn ='in';
     private $remarkOut ='out';
     private $remarkWarehouse ='warehouse';
-    public function incomingWasteIndex(): View
+    public function incomingWasteIndex()
     {
         $id=Auth::user()->id;
         $profileData = User::find($id);
@@ -30,15 +30,45 @@ class ProcessingController extends Controller
         $listSources = Source::all();
         $listTypes = Type::all();
         $listManufactures = Manufacture::all();
+        $listInventory = Inventory::with(
+            'sources','types','manufactures','products')
+            // ->where('remark', '=', $this->remarkIn)
+            ->get();
+        $listProcessingsAll = Processing::with(
+            'nasabahs','sources','types','manufactures','namaNasabah',
+            'processingHasProducts')
+            // ->where('remark', '=', $this->remarkIn)
+            ->get();
+        $listProcessingsIn = Processing::with(
+            'nasabahs','sources','types','manufactures','namaNasabah')
+            ->where('remark', '=', $this->remarkIn)
+            ->get();
+        $listProcessingsOut = Processing::with(
+            'nasabahs','sources','types','manufactures','namaNasabah')
+            ->where('remark', '=', $this->remarkOut)
+            ->get();
         $listProcessings = Processing::with(
             'nasabahs','sources','types','manufactures','namaNasabah')
-            ->where('remark', '=', $this->remarkIn)->get();
-        return view('main.incomingwaste.index', [
+            ->where('remark', '=', $this->remarkWarehouse)
+            ->get();
+        $listProcessingsStatus = ProcessingStatus::with(
+            'products','processingHasProducts','processings')
+            // ->where('remark', '=', $this->remarkWarehouse)
+            ->get();
+
+        // return response()->json($listProcessingsStatus);
+
+        return view('main.inventories.index', [
             'profileData'=>$profileData,
+            'listInventory'=>$listInventory,
             'listProcessings' => $listProcessings,
+            'listProcessingsAll'=> $listProcessingsAll,
+            'listProcessingsIn'=> $listProcessingsIn,
+            'listProcessingsOut'=> $listProcessingsOut,
             'listSources'=>$listSources,
             'listTypes'=>$listTypes,
-            'listManufactures'=>$listManufactures]);
+            'listManufactures'=>$listManufactures,
+            'listProcessingsStatus'=>$listProcessingsStatus]);
     }
 
     public function StoreNewIncomingWaste(Request $request)

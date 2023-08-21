@@ -47,7 +47,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a href="pages/apps/chat.html" class="nav-link">
+            <a href="{{ route('main.inventory') }}" class="nav-link">
               <i class="link-icon" data-feather="truck"></i>
               <span class="link-title">Inventory</span>
             </a>

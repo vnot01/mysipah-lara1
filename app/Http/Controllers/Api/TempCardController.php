@@ -59,13 +59,13 @@ class TempCardController extends Controller
             }else{
                 $notification = array(
                     'status'=>false,
-                    'alert-type' => 'gagal simpan',
+                    'alert-type' => 'error'
                 );
             }
         }else{
             $notification = array(
                 'status'=>false,
-                'alert-type' => 'gagal hapus',
+                'alert-type' => 'error'
             );
         }
 

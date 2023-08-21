@@ -181,7 +181,7 @@
                   @forelse ($listProcessings as $key => $item)
                   <tr class="align-middle">
                     <td>{{ $key+1 }}</td>
-                    <td>{{ $item->namaNasabah->user->name }} <br>
+                    <td>{{ $item->nasabahs->user->name }} <br>
                         {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td>
                     <td>{{ $item->sources->nama }}</td>
                     <td>{{ $item->types->nama }}</td>

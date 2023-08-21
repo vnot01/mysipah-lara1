@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('nokartu')->default('xxxxxxxxxxx');
             $table->timestamps();
         });
+        Schema::table('nasabahs', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**
