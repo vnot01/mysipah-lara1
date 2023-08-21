@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('temp_cards', function (Blueprint $table) {
+        Schema::create('temp_vols', function (Blueprint $table) {
             $table->id();
-            $table->string('nokartu')->default('XXXXXXXXXXX');
+            $table->string('volume')->default('0');
             $table->timestamps();
         });
-        // Schema::table('temp_cards', function (Blueprint $table) {
+
+        // Schema::table('temp_vols', function (Blueprint $table) {
         //     $table->softDeletes();
         // });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('temp_cards');
+        Schema::dropIfExists('temp_vol');
     }
 };

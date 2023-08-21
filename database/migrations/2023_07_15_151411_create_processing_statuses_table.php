@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('processing_id')->nullable()->default(1);
             $table->unsignedBigInteger('products_id')->nullable()->default(1);
-            $table->string('vol')->nullable()->default(0);
+            $table->string('volume')->nullable()->default(0);
             $table->boolean('status')->default(0);
             $table->timestamps();
         });

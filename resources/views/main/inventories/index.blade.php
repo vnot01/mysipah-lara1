@@ -176,7 +176,10 @@
                                 <td>{{ $item->volume }}</td>
                                 <td>{{ $item->ukuran }}</td>
                                 <td>{{ $item->jumlah_produk }}</td>
-                                <td>{{ $item->photo }}</td>
+                                <td class="text-start">
+                                    <img src="{{ url('/upload/images/products'.$item->photo.'.png') }}"
+                                            style="height: 50px;width:50px;" >
+                                </td>
                                 {{-- <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td> --}}
                                 <td class="text-start">
                                     @if ($item->remark == 'warehouse')
@@ -225,7 +228,7 @@
                                 <td>{{ $item->products->nama }} <br>
                                 <td>{{ $item->processings->types->nama }}</td>
                                 {{-- <td>{{ $item->location_id }}</td> --}}
-                                <td>{{ $item->vol }}</td>
+                                <td>{{ $item->volume }}</td>
                                 <td>{{ $item->processings->ukuran }}</td>
                                 <td>{{ $item->processings->jumlah_produk }}</td>
                                 {{-- <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td> --}}

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeSeeder::class);
         $this->call(NasabahSeeder::class);
         $this->call(TempCardSeeder::class);
+        $this->call(TempVolSeeder::class);
         $this->call(StatusAlatSeeder::class);
         $this->call(ProcessingSeeder::class);
         $this->call(InventorySeeder::class);

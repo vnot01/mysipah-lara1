@@ -2,25 +2,21 @@
 
 namespace Database\Seeders;
 
-use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ProcessingStatusSeeder extends Seeder
+class TempVolSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('processing_statuses')->insert([
+        //
+        DB::table('temp_vols')->insert([
             [
-                'processing_id'=>'7',
-                'products_id'=>'1',
-                'volume'=>'0.5',
-                'status'=>'0',
-                'created_at'=>Carbon::now(),
+                'volume'=>'1',
             ],
         ]);
     }
