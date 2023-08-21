@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\PersonalAccessToken;
 use App\Models\Source;
 use App\Models\TempCard;
+use App\Models\TempVol;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -68,6 +69,26 @@ class NasabahController extends Controller
         //     'nokartu' => $childCategory->nokartu,
         // ]);
     }
+
+    public function getTempVol(){
+        $data = [];
+        $childCategory = TempVol::latest()->get();
+        foreach ( $childCategory as $childCat ) {
+            $data =
+            [
+                'id'         => $childCat->id,
+                'volume'      => $childCat->volume,
+            ];
+        }
+
+        return response()->json($data);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'id' => $childCategory->id,
+        //     'nokartu' => $childCategory->nokartu,
+        // ]);
+    }
+
     public function getNoKartu(): View {
 
         // $id=Auth::user()->id;

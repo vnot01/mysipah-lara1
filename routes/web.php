@@ -88,6 +88,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->name('incomingwaste.add');
     Route::get('/incomingwaste/scan',[NasabahController::class, 'getTempCard']
         )->middleware(['auth', 'verified'])->name('scan.kartu');
+    Route::get('/incomingwaste/vol',[NasabahController::class, 'getTempVol']
+        )->middleware(['auth', 'verified'])->name('get.vol');
 
     Route::get('/main/processing', [
         ProcessingController::class,
@@ -103,6 +105,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->name('processing.add');
     Route::get('/processing/scan',[NasabahController::class, 'getTempCard']
             )->middleware(['auth', 'verified'])->name('scan.kartu');
+    Route::get('/processing/vol',[NasabahController::class, 'getTempVol']
+        )->middleware(['auth', 'verified'])->name('get.vol');
 
     Route::get('/main/queue', [
         ProcessingController::class,
@@ -118,6 +122,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->name('queue.add');
     Route::get('/queue/scan',[NasabahController::class, 'getTempCard']
             )->middleware(['auth', 'verified'])->name('scan.kartu');
+    Route::get('/queue/vol',[NasabahController::class, 'getTempVol']
+        )->middleware(['auth', 'verified'])->name('get.vol');
 
     Route::get('/main/inventory', [
         InventoryController::class,
@@ -133,6 +139,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->name('inventory.add');
     Route::get('/inventory/scan',[NasabahController::class, 'getTempCard']
             )->middleware(['auth', 'verified'])->name('scan.kartu');
+    Route::get('/inventory/vol',[NasabahController::class, 'getTempVol']
+        )->middleware(['auth', 'verified'])->name('get.vol');
     // Route::get('/all/sources','AllSources')->name('all.sources');
 
     // Route::get('/all/sources', [

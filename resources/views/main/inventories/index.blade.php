@@ -177,8 +177,13 @@
                                 <td>{{ $item->ukuran }}</td>
                                 <td>{{ $item->jumlah_produk }}</td>
                                 <td class="text-start">
-                                    <img src="{{ url('/upload/images/products'.$item->photo.'.png') }}"
-                                            style="height: 50px;width:50px;" >
+                                    @if(!empty($item->photo))
+                                        <img src="{{ url('/upload/images/products/'.$item->photo.'.png') }}">
+                                    @else
+                                        <img src="{{ url('/upload/images/products/no_image.jpg') }}">
+                                    @endif
+                                    {{-- <img src="{{ url('/upload/images/products/'.$item->photo.'.png') }}"
+                                            style="height: 50px;width:50px;" > --}}
                                 </td>
                                 {{-- <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td> --}}
                                 <td class="text-start">
@@ -233,8 +238,13 @@
                                 <td>{{ $item->processings->jumlah_produk }}</td>
                                 {{-- <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td> --}}
                                 <td class="text-start">
-                                    <img src="{{ url('/upload/images/products'.$item->processings->photo.'.png') }}"
-                                            style="height: 50px;width:50px;" >
+                                    @if(!empty($item->photo))
+                                        <img src="{{ url('/upload/images/products/'.$item->processings->photo.'.png') }}">
+                                    @else
+                                        <img src="{{ url('/upload/images/products/no_image.jpg') }}">
+                                    @endif
+                                    {{-- <img src="{{ url('/upload/images/products'.$item->processings->photo.'.png') }}"
+                                            style="height: 50px;width:50px;" > --}}
                                 </td>
                                 <td class="text-start">
                                     <div class="d-grid gap-2">
