@@ -11,4 +11,8 @@ class Type extends Model
 {
     use HasFactory, Notifiable,SoftDeletes;
     protected $guarded = [];
+
+    public function processingHasTypes(){
+        return $this->hasManyThrough(ProcessingStatus::class,Processing::class,'id','processing_id');
+    }
 }

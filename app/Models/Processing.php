@@ -36,6 +36,14 @@ class Processing extends Model
         return $this->belongsTo(Manufacture::class, 'manufactures_id');
     }
 
+    public function processingStatus(){
+        return $this->belongsTo(ProcessingStatus::class,'processings_id');
+    }
+
+    public function processingHasProducts(){
+        return $this->hasManyThrough(ProcessingStatus::class,Processing::class,'id','processing_id');
+    }
+
     // public function inventories()
     // {
     //     return $this->belongsTo(Inventory::class, 'inventories_id');

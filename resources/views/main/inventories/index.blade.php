@@ -49,9 +49,9 @@
                             <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Product</th>
+                                {{-- <th>Product</th> --}}
                                 <th>Type</th>
-                                <th>Location</th>
+                                {{-- <th>Location</th> --}}
                                 <th>Vol (kg)</th>
                                 <th>Size (cm)</th>
                                 <th>Amount (qty)</th>
@@ -64,18 +64,25 @@
                             @forelse ($listProcessingsAll as $key => $item)
                             <tr class="align-middle">
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ $item->nasabahs->user->name }} <br>
-                                    {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td>
+                                {{-- <td>{{ $item->nasabahs->user->name }} <br>
+                                    {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td> --}}
                                 <td>{{ $item->types->nama }}</td>
-                                <td>{{ $item->location_id }}</td>
+                                {{-- <td>{{ $item->location_id }}</td> --}}
                                 <td>{{ $item->volume }}</td>
                                 <td>{{ $item->ukuran }}</td>
                                 <td>{{ $item->jumlah_produk }}</td>
                                 <td>{{ $item->photo }}</td>
                                 {{-- <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td> --}}
                                 <td class="text-start">
-                                    <img src="{{ url('/upload/images/'.$item->remark.'.png') }}"
-                                            style="height: 50px;width:50px;" >
+                                @if ($item->remark == 'warehouse')
+                                    <span class="badge rounded-pill bg-primary">Warehouse</span>
+                                @elseif ($item->remark == 'in')
+                                    <span class="badge rounded-pill bg-success">Incoming</span>
+                                @else
+                                    <span class="badge rounded-pill bg-warning">Outcoming</span>
+                                @endif
+                                    {{-- <img src="{{ url('/upload/images/'.$item->remark.'.png') }}"
+                                            style="height: 50px;width:50px;" > --}}
                                 </td>
                             </tr>
                             @empty
@@ -95,9 +102,9 @@
                             <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Product</th>
+                                {{-- <th>Product</th> --}}
                                 <th>Type</th>
-                                <th>Location</th>
+                                {{-- <th>Location</th> --}}
                                 <th>Vol (kg)</th>
                                 <th>Size (cm)</th>
                                 <th>Amount (qty)</th>
@@ -110,18 +117,25 @@
                             @forelse ($listProcessingsIn as $key => $item)
                             <tr class="align-middle">
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ $item->nasabahs->user->name }} <br>
-                                    {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td>
+                                {{-- <td>{{ $item->nasabahs->user->name }} <br>
+                                    {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td> --}}
                                 <td>{{ $item->types->nama }}</td>
-                                <td>{{ $item->location_id }}</td>
+                                {{-- <td>{{ $item->location_id }}</td> --}}
                                 <td>{{ $item->volume }}</td>
                                 <td>{{ $item->ukuran }}</td>
                                 <td>{{ $item->jumlah_produk }}</td>
                                 <td>{{ $item->photo }}</td>
                                 {{-- <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td> --}}
                                 <td class="text-start">
-                                    <img src="{{ url('/upload/images/'.$item->remark.'.png') }}"
-                                            style="height: 50px;width:50px;" >
+                                    @if ($item->remark == 'warehouse')
+                                        <span class="badge rounded-pill bg-primary">Warehouse</span>
+                                    @elseif ($item->remark == 'in')
+                                        <span class="badge rounded-pill bg-success">Incoming</span>
+                                    @else
+                                        <span class="badge rounded-pill bg-warning">Outcoming</span>
+                                    @endif
+                                    {{-- <img src="{{ url('/upload/images/'.$item->remark.'.png') }}"
+                                            style="height: 50px;width:50px;" > --}}
                                 </td>
                             </tr>
                             @empty
@@ -141,9 +155,8 @@
                             <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Product</th>
+                                {{-- <th>Product</th> --}}
                                 <th>Type</th>
-                                <th>Location</th>
                                 <th>Vol (kg)</th>
                                 <th>Size (cm)</th>
                                 <th>Amount (qty)</th>
@@ -156,18 +169,25 @@
                             @forelse ($listProcessingsOut as $key => $item)
                             <tr class="align-middle">
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ $item->nasabahs->user->name }} <br>
-                                    {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td>
+                                {{-- <td>{{ $item->nasabahs->user->name }} <br>
+                                    {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td> --}}
                                 <td>{{ $item->types->nama }}</td>
-                                <td>{{ $item->location_id }}</td>
+                                {{-- <td>{{ $item->location_id }}</td> --}}
                                 <td>{{ $item->volume }}</td>
                                 <td>{{ $item->ukuran }}</td>
                                 <td>{{ $item->jumlah_produk }}</td>
                                 <td>{{ $item->photo }}</td>
                                 {{-- <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td> --}}
                                 <td class="text-start">
-                                    <img src="{{ url('/upload/images/'.$item->remark.'.png') }}"
-                                            style="height: 50px;width:50px;" >
+                                    @if ($item->remark == 'warehouse')
+                                        <span class="badge rounded-pill bg-primary">Warehouse</span>
+                                    @elseif ($item->remark == 'in')
+                                        <span class="badge rounded-pill bg-success">Incoming</span>
+                                    @else
+                                        <span class="badge rounded-pill bg-warning">Outcoming</span>
+                                    @endif
+                                    {{-- <img src="{{ url('/upload/images/'.$item->remark.'.png') }}"
+                                            style="height: 50px;width:50px;" > --}}
                                 </td>
                             </tr>
                             @empty
@@ -189,7 +209,7 @@
                                 <th>No.</th>
                                 <th>Product</th>
                                 <th>Type</th>
-                                <th>Location</th>
+                                {{-- <th>Location</th> --}}
                                 <th>Vol (kg)</th>
                                 <th>Size (cm)</th>
                                 <th>Amount (qty)</th>
@@ -199,21 +219,36 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse ($listProcessings as $key => $item)
+                            @forelse ($listProcessingsStatus as $key => $item)
                             <tr class="align-middle">
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ $item->nasabahs->user->name }} <br>
-                                    {{ Str::mask($item->nasabahs->nokartu, '*',-20, 7) }}</td>
-                                <td>{{ $item->types->nama }}</td>
-                                <td>{{ $item->location_id }}</td>
-                                <td>{{ $item->volume }}</td>
-                                <td>{{ $item->ukuran }}</td>
-                                <td>{{ $item->jumlah_produk }}</td>
-                                <td>{{ $item->photo }}</td>
+                                <td>{{ $item->products->nama }} <br>
+                                <td>{{ $item->processings->types->nama }}</td>
+                                {{-- <td>{{ $item->location_id }}</td> --}}
+                                <td>{{ $item->vol }}</td>
+                                <td>{{ $item->processings->ukuran }}</td>
+                                <td>{{ $item->processings->jumlah_produk }}</td>
                                 {{-- <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td> --}}
                                 <td class="text-start">
-                                    <img src="{{ url('/upload/images/'.$item->remark.'.png') }}"
+                                    <img src="{{ url('/upload/images/products'.$item->processings->photo.'.png') }}"
                                             style="height: 50px;width:50px;" >
+                                </td>
+                                <td class="text-start">
+                                    <div class="d-grid gap-2">
+                                    @if ($item->status == 0)
+                                        <button type="button" class="btn btn-danger" 
+                                            data-bs-dismiss="modal" data-bs-toggle="tooltip" 
+                                            data-bs-placement="top" data-bs-title="Click to Change Status Finish">
+                                            On Process</button>
+                                        
+                                    @else
+                                        <button type="button" class="btn btn-success"
+                                            data-bs-dismiss="modal" data-bs-toggle="tooltip" 
+                                            data-bs-placement="top" data-bs-title="Click to Change Status"
+                                            disabled>Finish</button>
+                                        
+                                    @endif
+                                    </div>
                                 </td>
                             </tr>
                             @empty

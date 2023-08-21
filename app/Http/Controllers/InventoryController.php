@@ -5,6 +5,7 @@ use App\Models\Inventory;
 use App\Models\Manufacture;
 use App\Models\Nasabah;
 use App\Models\Processing;
+use App\Models\ProcessingStatus;
 use App\Models\Source;
 use App\Models\TempCard;
 use App\Models\Type;
@@ -21,7 +22,7 @@ class InventoryController extends Controller
     private $remarkIn ='in';
     private $remarkOut ='out';
     private $remarkWarehouse ='warehouse';
-    public function incomingWasteIndex(): View
+    public function incomingWasteIndex()
     {
         $id=Auth::user()->id;
         $profileData = User::find($id);
@@ -34,7 +35,8 @@ class InventoryController extends Controller
             // ->where('remark', '=', $this->remarkIn)
             ->get();
         $listProcessingsAll = Processing::with(
-            'nasabahs','sources','types','manufactures','namaNasabah')
+            'nasabahs','sources','types','manufactures','namaNasabah',
+            'processingHasProducts')
             // ->where('remark', '=', $this->remarkIn)
             ->get();
         $listProcessingsIn = Processing::with(
@@ -49,6 +51,13 @@ class InventoryController extends Controller
             'nasabahs','sources','types','manufactures','namaNasabah')
             ->where('remark', '=', $this->remarkWarehouse)
             ->get();
+        $listProcessingsStatus = ProcessingStatus::with(
+            'products','processingHasProducts','processings')
+            // ->where('remark', '=', $this->remarkWarehouse)
+            ->get();
+
+        // return response()->json($listProcessingsStatus);
+
         return view('main.inventories.index', [
             'profileData'=>$profileData,
             'listInventory'=>$listInventory,
@@ -58,7 +67,8 @@ class InventoryController extends Controller
             'listProcessingsOut'=> $listProcessingsOut,
             'listSources'=>$listSources,
             'listTypes'=>$listTypes,
-            'listManufactures'=>$listManufactures]);
+            'listManufactures'=>$listManufactures,
+            'listProcessingsStatus'=>$listProcessingsStatus]);
     }
 
     public function StoreNewIncomingWaste(Request $request)

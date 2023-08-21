@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusAlatSeeder::class);
         $this->call(ProcessingSeeder::class);
         $this->call(InventorySeeder::class);
+        $this->call(ProcessingStatusSeeder::class);
         \App\Models\User::factory(5)->create();
 
         // \App\Models\User::factory()->create([
