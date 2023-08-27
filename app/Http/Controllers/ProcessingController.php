@@ -110,18 +110,18 @@ class ProcessingController extends Controller
                 // $volLast = $inv->volume;
                 $volIn = $request->volume;
                 $totalVolNow = $volIn+$volLast;
-                // Processing::insert([
-                //     'sources_id'=>$sourcesID,
-                //     'types_id'=>$typesID,
-                //     'manufactures_id'=>$manufacturesID,
-                //     'nokartu'=>$RFID,
-                //     'volume'=>$volIn,
-                //     'total_volume'=>$totalVolNow,
-                //     'nasabahs_id'=>$idNasabah,
-                //     'remark'=>$this->remarkIn,
-                //     'created_at'=>Carbon::now(),
-                // ]);
-        
+                Processing::insert([
+                    'sources_id'=>$sourcesID,
+                    'types_id'=>$typesID,
+                    'manufactures_id'=>$manufacturesID,
+                    'nokartu'=>$RFID,
+                    'volume'=>$volIn,
+                    'total_volume'=>$totalVolNow,
+                    'nasabahs_id'=>$idNasabah,
+                    'remark'=>$this->remarkIn,
+                    'created_at'=>Carbon::now(),
+                ]);
+
                 $notification = array(
                     'message' => 'Incoming Process Waste Create Successfully',
                     'alert-type' => 'success',
