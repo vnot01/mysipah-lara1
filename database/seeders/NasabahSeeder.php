@@ -17,11 +17,11 @@ class NasabahSeeder extends Seeder
         DB::table('nasabahs')->insert([
             [
                 'users_id'=>'1',
-                'nokartu'=>'XXXXXXXXXXX',
+                'nokartu'=>'81601992109',
             ],
             [
                 'users_id'=>'5',
-                'nokartu'=>'81601992109',
+                'nokartu'=>'12345678789',
             ],
         ]);
     }
