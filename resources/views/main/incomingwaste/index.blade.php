@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="volume" class="form-label">Volume (kg)</label>
-                                        <input type="text" readonly="true" class="form-control
+                                        <input type="text" class="form-control
                                             @error('volume') is-invalid
                                             @enderror " value="{{ old('volume', '')}}"
                                             id="volume" name="volume" autocomplete="off"

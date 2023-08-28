@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('nasabahs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('users_id')->default('1');
-            $table->string('nokartu')->default('xxxxxxxxxxx');
+            $table->string('nokartu')->default('81601992109');
             $table->timestamps();
         });
         Schema::table('nasabahs', function (Blueprint $table) {

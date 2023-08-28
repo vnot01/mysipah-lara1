@@ -176,9 +176,10 @@
                                 <table id="dataTableExample" class="table">
                                     <thead>
                                         <tr>
-                                            <th style="vertical-align : middle;text-align:center;">API TOKENS</th>
+                                            <th style="vertical-align : middle;text-align:center;" colspan="2">API TOKENS</th>
+                                            <th></th>
                                             <th style="vertical-align : middle;text-align:center;">TYPE</th>
-                                            <th style="vertical-align : middle;text-align:center;" colspan="2">ACTION
+                                            <th style="vertical-align : middle;text-align:center;">ACTION
                                             </th>
                                         </tr>
                                     </thead>
@@ -188,28 +189,42 @@
                                             method="POST">
                                             {{-- @csrf @method('POST') --}}
                                             <tr>
-                                                <td style="vertical-align : middle;text-align:center;">
+                                                <td style="vertical-align : middle;text-align:center;" colspan="2">
                                                     <input type="text" class="form-control" value="{{ $a->api_tokens }}"
                                                         id="{{ $a->id }}-{{$a->api_tokens}}" name="api_tokens" readonly>
-                                                    <input type="text" class="form-control" value="{{ $a->id }}"
+                                                    <input type="hidden" class="form-control" value="{{ $a->id }}"
                                                         id="{{ $a->id }}-{{$a->api_tokens}}" name="id_token" readonly>
                                                 </td>
-                                                <td style="vertical-align : middle;text-align:center;">
-                                                    {{ $a->token_type }}
-                                                </td>
-                                                <td class="text-center">
+                                                <td>
                                                     <button type="button" class="btn btn-info btn-icon"
                                                         onclick="CopyToClipboard('{{ $a->id }}-{{$a->api_tokens}}')"
                                                         data-bs-toggle="tooltip" data-bs-placement="top"
                                                         title="Copy Token to Clipboard">
                                                         <i data-feather="clipboard"></i>
                                                     </button>
+                                                </td>
+                                                <td style="vertical-align : middle;text-align:center;">
+                                                    {{ $a->token_type }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{-- <button type="button" class="btn btn-info btn-icon"
+                                                        onclick="CopyToClipboard('{{ $a->id }}-{{$a->api_tokens}}')"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Copy Token to Clipboard">
+                                                        <i data-feather="clipboard"></i>
+                                                    </button> --}}
                                                     {{-- <button class="btn btn-primary"
                                                     onclick="showSwal('passing-parameter-execute-cancel')">Click
                                                     here!</button> --}}
 
+                                                    @csrf @method('DELETE')
+                                                    <button type="submit" onclick="return confirm('Are you sure?')"
+                                                        class="btn btn-danger btn-icon" data-bs-toggle="tooltip"
+                                                        data-bs-placement="top" title="Delete Token">
+                                                        <i data-feather="trash-2"></i>
+                                                    </button>
                                                 </td>
-                                                <td class="text-center">
+                                                {{-- <td class="text-center"> --}}
                                                     {{-- <form method="post"  --}}
                                                     {{-- action="{{url('admin/removeCategory')}}/{{$product->id}}"> --}}
                                                     {{-- <form onsubmit="return confirm('Are you sure?');"
@@ -220,14 +235,14 @@
                                                     {{-- <button type="submit" class="btn btn-sm btn-danger">
                                                         DELETE
                                                     </button> --}}
-                                                    @csrf @method('DELETE')
+                                                    {{-- @csrf @method('DELETE')
                                                     <button type="submit" onclick="return confirm('Are you sure?')"
                                                         class="btn btn-danger btn-icon" data-bs-toggle="tooltip"
                                                         data-bs-placement="top" title="Delete Token">
                                                         <i data-feather="trash-2"></i>
-                                                    </button>
+                                                    </button> --}}
                                                     {{-- </form>                                                 --}}
-                                                </td>
+                                                {{-- </td> --}}
                                             </tr>
 
                                             @empty
