@@ -19,12 +19,21 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::apiResource('tempCards',TempCardController::class);
-Route::controller(TempCardController::class)->group(function(){
-    Route::post('scankartu','ScanKartu')
-        ->name('nokartu.scankartu');
-    // Route::get('scankartu/{noRFID}','ScanKartu')
-    //     ->name('nokartu.scankartu');
+// Route::apiResource('tempCards',TempCardController::class);
+// Route::controller(TempCardController::class)->group(function(){
+//     Route::post('scankartu','ScanKartu')
+//         ->name('nokartu.scankartu');
+//         // Route::get('scankartu/{noRFID}','ScanKartu')
+//         //     ->name('nokartu.scankartu');
+// });
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('tempCards',TempCardController::class);
+    Route::controller(TempCardController::class)->group(function(){
+        Route::post('scankartu','ScanKartu')
+            ->name('nokartu.scankartu');
+        // Route::get('scankartu/{noRFID}','ScanKartu')
+        //     ->name('nokartu.scankartu');
+    });
 });
+
 
