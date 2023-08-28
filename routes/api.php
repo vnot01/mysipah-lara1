@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\TempCardController;
+use App\Http\Controllers\Api\TempVolController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,11 @@ Route::middleware('auth:sanctum')->group(function () {
         // Route::get('scankartu/{noRFID}','ScanKartu')
         //     ->name('nokartu.scankartu');
     });
+
+    Route::controller(TempVolController::class)->group(function(){
+        Route::post('kirimvol','UkurVolTimbangan')
+            ->name('ukur.timbangan');
+        // Route::get('scankartu/{noRFID}','ScanKartu')
+        //     ->name('nokartu.scankartu');
+    });
 });
-
-

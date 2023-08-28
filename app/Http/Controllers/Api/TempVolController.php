@@ -7,6 +7,7 @@ use App\Http\Resources\ProcessingResource;
 use App\Http\Resources\TempVolResource;
 use App\Models\Processing;
 use App\Models\TempVol;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TempVolController extends Controller
@@ -73,5 +74,42 @@ class TempVolController extends Controller
         //
         $tempVol->delete();
         return response(null, 204);
+    }
+
+    public function UkurVolTimbangan(Request $request){
+        // $request->validate([
+        //     'nokartu' => 'required',
+        // ]);
+        $vol = $request->input('volume');
+        $hapus = TempVol::truncate();
+        // $rfidNasabahFind     = Nasabah::where("nokartu",$noRFID)->count();
+        // $rfidNasabah = Nasabah::where("nokartu",$noRFID)->get();
+
+        if ($hapus){
+            // $tempCards = TempCard::create($request->all());
+            $simpanRFID=TempVol::updateOrCreate([
+                'volume'=>$vol,
+                'created_at'=>Carbon::now(),
+            ]);
+            if ($simpanRFID) {
+                $notification = array(
+                    'status'=>true,
+                    'alert-type' => 'success',
+                    'volume'=>$vol,
+                    'created_at'=>Carbon::now(),
+                );
+            }else{
+                $notification = array(
+                    'status'=>false,
+                    'alert-type' => 'error'
+                );
+            }
+        }else{
+            $notification = array(
+                'status'=>false,
+                'alert-type' => 'error'
+            );
+        }
+        return response()->json($notification);
     }
 }

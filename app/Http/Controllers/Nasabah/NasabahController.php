@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use RealRashid\SweetAlert\Facades\Alert;
+use Barryvdh\Debugbar\Facades\Debugbar;
 
 class NasabahController extends Controller
 {
@@ -54,14 +55,19 @@ class NasabahController extends Controller
     public function getTempCard(){
         $data = [];
         $childCategory = TempCard::latest()->get();
+        $tempVol = TempVol::latest()->get();
         foreach ( $childCategory as $childCat ) {
-            $data =
-            [
-                'id'         => $childCat->id,
-                'nokartu'      => $childCat->nokartu,
-            ];
+            foreach ( $tempVol as $childCat1 ) {
+                $data =
+                [
+                    'id'         => $childCat->id,
+                    'nokartu'      => $childCat->nokartu,
+                    'volume'      => $childCat1->volume,
+                ];
+            }
         }
-
+        // console.log('TempCard = '.$childCategory);
+        // console.log('tempVol = '.$tempVol);
         return response()->json($data);
         // return response()->json([
         //     'status' => 'success',
@@ -95,8 +101,10 @@ class NasabahController extends Controller
         // $profileData = User::find($id);
         // $listTokens = ApiToken::latest()->paginate(5);
         $scanKartu = TempCard::latest()->get();
+        $tempVol = TempVol::latest()->get();
         return view('nasabah.nokartu', [
-            'scanKartu' => $scanKartu]);
+            'scanKartu' => $scanKartu,
+            'tempVol' =>$tempVol]);
     }
 
     public function StoreNewNasabah(Request $request)

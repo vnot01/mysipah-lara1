@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\TempCardResource;
 use App\Models\Nasabah;
 use App\Models\TempCard;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TempCardController extends Controller
@@ -31,8 +32,9 @@ class TempCardController extends Controller
 
         if ($hapus){
             // $tempCards = TempCard::create($request->all());
-            $simpanRFID=TempCard::insert([
+            $simpanRFID=TempCard::updateOrCreate([
                 'nokartu'=>$noRFID,
+                'created_at'=>Carbon::now(),
             ]);
             if ($simpanRFID) {
                 if( $rfidNasabahFind ==0 ){
@@ -97,7 +99,7 @@ class TempCardController extends Controller
         //                 'data'         => $rfidNasabah,
         //         );
         //     // }
-            
+
         // }
         // return new TempCardResource($tempCards);
         return response()->json($notification);

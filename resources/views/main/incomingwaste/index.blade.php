@@ -232,19 +232,22 @@
     $(document).ready(function(){
         var self = $(this),
         nokartu = self.data('nokartu');
-        id = self.data('id');
+        // id = self.data('id');
+        // id = self.data('id');
+        volume = self.data('volume');
         setInterval(function(){
             $.ajax({
                 type:"GET",
                 url:"/incomingwaste/scan",
                 data: {
                     nokartu: nokartu,
-                    id: id
+                    volume: volume
                 },
                 dataType: 'json',
                 success:function(data)
                 {
                     $('#rfid').val(data.nokartu);
+                    $('#volume').val(data.volume);
                 }
             });
         },1000);
