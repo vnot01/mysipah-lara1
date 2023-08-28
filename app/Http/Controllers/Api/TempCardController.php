@@ -36,9 +36,12 @@ class TempCardController extends Controller
             key: $key,
             cipher: config('app.cipher'),
         );
-        $noRFID = $encrypter->encrypt($plainText);
+        /* UNTUK MEMPEROLEH ENCRIPSI DATA */
+        // $noRFID = $encrypter->encrypt($plainText);
 
-        // $noRFID = $encrypter->decrypt($plainText);
+        /* UNTUK MEMPEROLEH DECRIPSI DATA */
+        $noRFID = $encrypter->decrypt($plainText);
+
         // $encryptString  = $request->input('id');
         // // $notification = array(
         // //     'status'=>false,
