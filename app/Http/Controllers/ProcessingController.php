@@ -121,7 +121,7 @@ class ProcessingController extends Controller
                     'remark'=>$this->remarkIn,
                     'created_at'=>Carbon::now(),
                 ]);
-
+        
                 $notification = array(
                     'message' => 'Incoming Process Waste Create Successfully',
                     'alert-type' => 'success',
