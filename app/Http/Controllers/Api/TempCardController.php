@@ -117,8 +117,7 @@ class TempCardController extends Controller
     public function store(Request $request)
     {
         //
-        $tempCards = TempCard::create($request->all());
-        
+        $tempCards = TempCard::updateOrCreate($request->all());
         return new TempCardResource($tempCards);
     }
 
@@ -144,8 +143,7 @@ class TempCardController extends Controller
     public function update(Request $request, TempCard $tempCard)
     {
         //
-        $tempCard->update($request->all());
-        
+        $tempCard->updateOrCreate($request->all());
         return new TempCardResource($tempCard);
     }
 

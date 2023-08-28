@@ -191,7 +191,7 @@
                                                 <td style="vertical-align : middle;text-align:center;">
                                                     <input type="text" class="form-control" value="{{ $a->api_tokens }}"
                                                         id="{{ $a->id }}-{{$a->api_tokens}}" name="api_tokens" readonly>
-                                                    <input type="hidden" class="form-control" value="{{ $a->id }}"
+                                                    <input type="text" class="form-control" value="{{ $a->id }}"
                                                         id="{{ $a->id }}-{{$a->api_tokens}}" name="id_token" readonly>
                                                 </td>
                                                 <td style="vertical-align : middle;text-align:center;">
@@ -204,9 +204,9 @@
                                                         title="Copy Token to Clipboard">
                                                         <i data-feather="clipboard"></i>
                                                     </button>
-                                                    <button class="btn btn-primary"
+                                                    {{-- <button class="btn btn-primary"
                                                     onclick="showSwal('passing-parameter-execute-cancel')">Click
-                                                    here!</button>
+                                                    here!</button> --}}
 
                                                 </td>
                                                 <td class="text-center">

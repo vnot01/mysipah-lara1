@@ -141,11 +141,22 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
+                                    <label for="volume" class="form-label">Volume (kg)</label>
+                                        <input type="text" readonly="true" class="form-control
+                                            @error('volume') is-invalid
+                                            @enderror " value="{{ old('volume', '')}}"
+                                            id="volume" name="volume" autocomplete="off"
+                                            placeholder="Leave Blank If Not Add New">
+                                            @error('volume')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                </div>
+                                {{-- <div class="mb-3">
                                     <label for="volume" class="form-label">Volume (kg):</label>
                                     <input name="volume" type="text" class="form-control" id="volume">
                                     {{-- <label for="message-text" class="form-label">Message:</label>
-                                    <textarea class="form-control" id="message-text"></textarea> --}}
-                                </div>
+                                    <textarea class="form-control" id="message-text"></textarea> - -}}
+                                </div> --}}
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Save</button>
@@ -237,6 +248,22 @@
                 }
             });
         },1000);
+
+       /* setInterval(function(){
+            $.ajax({
+                type:"GET",
+                url:"/incomingwaste/vol",
+                data: {
+                    volume: volume,
+                    id: id
+                },
+                dataType: 'json',
+                success:function(data)
+                {
+                    $('#volume').val(data.volume);
+                }
+            });
+        },1000); */
 
         $('#type_id').on('change',function(){
             var typeName = $(this).children('option:selected').data('nama');
