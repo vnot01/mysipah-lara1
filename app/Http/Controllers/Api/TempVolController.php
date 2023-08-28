@@ -9,7 +9,7 @@ use App\Models\Processing;
 use App\Models\TempVol;
 use Illuminate\Http\Request;
 
-class ProcessingController extends Controller
+class TempVolController extends Controller
 {
     /**
      * Display a listing of the resource.
