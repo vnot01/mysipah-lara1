@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //         //     ->name('nokartu.scankartu');
 // });
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('tempCards',TempCardController::class);
+    // Route::apiResource('tempCards',TempCardController::class);
     Route::controller(TempCardController::class)->group(function(){
         Route::post('scankartu','ScanKartu')
             ->name('nokartu.scankartu');

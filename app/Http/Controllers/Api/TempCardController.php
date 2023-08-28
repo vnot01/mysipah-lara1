@@ -7,7 +7,10 @@ use App\Http\Resources\TempCardResource;
 use App\Models\Nasabah;
 use App\Models\TempCard;
 use Carbon\Carbon;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Encryption\Encrypter;
 
 class TempCardController extends Controller
 {
@@ -25,7 +28,37 @@ class TempCardController extends Controller
         // $request->validate([
         //     'nokartu' => 'required',
         // ]);
-        $noRFID = $request->input('id');
+        $plainText = $request->input('id');
+        // Our custom encryption key:
+        $key = 'U2x2QdvosFTtk5nL0ejrKqLFP1tUDtSt';
+        // $key = '012345678910111213141516171819202122232425262728293031';
+        $encrypter = new Encrypter(
+            key: $key,
+            cipher: config('app.cipher'),
+        );
+        $noRFID = $encrypter->encrypt($plainText);
+
+        // $noRFID = $encrypter->decrypt($plainText);
+        // $encryptString  = $request->input('id');
+        // // $notification = array(
+        // //     'status'=>false,
+        // //     'alert-type' => 'error',
+        // //     'message' => $encryptString
+        // // );
+        // try {
+        //     $decrypted = Crypt::decryptString($encryptString);
+        //     $noRFID = $decrypted;
+        // } catch (DecryptException $e) {
+        //     $notification = array(
+        //         'status'=>false,
+        //         'alert-type' => 'error',
+        //         'message' => 'DecryptException'
+        //     );
+        // }
+
+        // $noRFID = $request->input('id');
+        // $encryptString = $request->input('id');
+        // $noRFID = Crypt::encryptString($encryptString);
         $hapus = TempCard::truncate();
         $rfidNasabahFind     = Nasabah::where("nokartu",$noRFID)->count();
         $rfidNasabah = Nasabah::where("nokartu",$noRFID)->get();
@@ -42,7 +75,8 @@ class TempCardController extends Controller
                         'status'=>true,
                         'alert-type' => 'success',
                         'No RFID' => $noRFID,
-                        'qty'=>$rfidNasabahFind,
+                        'created_at'=>Carbon::now(),
+                        // 'qty'=>$rfidNasabahFind,
                     );
                     // return response()->json([
                     //     'status'=>true,
