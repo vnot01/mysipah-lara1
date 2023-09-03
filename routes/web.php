@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SourceController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\Warehouse\WarehouseController;
+use App\Http\Controllers\WasteProcessController;
 use Barryvdh\Debugbar\Facades\Debugbar;
 
 
@@ -251,7 +252,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
 
-    Route::get('/nasabah',[NasabahController::class, 'NasabahDashboard'],function () {
+    Route::get('/nasabah',[NasabahController::class, 'NasabahDashboard'],
+    function () {
         return view('nasabah.index');
     })->middleware(['auth', 'verified'])->name('nasabah.index');
     Route::get('/nasabah/scan',[NasabahController::class, 'getTempCard']
@@ -260,6 +262,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->middleware(['auth', 'verified'])->name('nokartu');
     Route::post('/nasabah/add',[NasabahController::class, 'StoreNewNasabah'])
         ->name('nasabah.add');
+
+    Route::get('/main/wasteprocess', [
+        WasteProcessController::class,
+        'WasteProcessIndex'
+        ])->name('main.wasteprocess');
 });
 
 // Route::middleware(['auth', 'role:warehouse'])->group(function () {

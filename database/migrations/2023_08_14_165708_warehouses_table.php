@@ -13,14 +13,19 @@ return new class extends Migration
     {
         Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('sources_id')->nullable()->default(1);
             $table->unsignedBigInteger('types_id')->nullable()->default(1);
             $table->unsignedBigInteger('manufactures_id')->nullable()->default(1);
-            $table->unsignedBigInteger('locations_id')->nullable()->default(1);
+            $table->unsignedBigInteger('inventories_id')->nullable()->default(1);
+            $table->unsignedBigInteger('nasabahs_id')->nullable()->default(1);
+            $table->string('nokartu')->nullable()->default('XXXXXXXXXXX');
             $table->string('volume')->nullable();
             $table->string('total_volume')->nullable();
+            $table->string('ukuran')->nullable();
+            $table->string('jumlah_produk')->nullable();
             $table->string('photo')->nullable();
-            $table->enum('remark', ['in','out','processing'])
+            $table->enum('remark', ['in','out','warehouse'])
                 ->nullable()->default('in');
             $table->timestamps();
         });
