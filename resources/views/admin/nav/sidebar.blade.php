@@ -35,10 +35,10 @@
             <div class="collapse" id="waste_processing">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="pages/email/read.html" class="nav-link">Lists Queue Processing</a>
+                  <a href="#" class="nav-link">Lists Queue Processing</a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/email/inbox.html" class="nav-link">Lists Processing</a>
+                  <a href="{{ route('main.wasteprocess') }}" class="nav-link">Lists Processing</a>
                 </li>
                 {{-- <li class="nav-item">
                   <a href="pages/email/compose.html" class="nav-link">Compose</a>
