@@ -16,12 +16,12 @@ class StatusAlatSeeder extends Seeder
         //
         DB::table('status_alats')->insert([
             [
-                'kode'=>'1',
-                'nama'=>'Register',
+                'kode' => '1',
+                'nama' => 'Register',
             ],
             [
-                'kode'=>'2',
-                'nama'=>'Scanning',
+                'kode' => '2',
+                'nama' => 'Scanning',
             ],
         ]);
     }

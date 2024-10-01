@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('status_alats', function (Blueprint $table) {
             $table->id();
-            $table->integer('kode');
-            $table->string('nama');
+            $table->integer('kode')->nullable();
+            $table->string('nama')->nullable();
             $table->timestamps();
         });
         Schema::table('status_alats', function (Blueprint $table) {
